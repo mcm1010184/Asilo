@@ -1,7 +1,17 @@
+using Asilo.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Referencia(s) a la cadena de conexión
+builder.Services.AddDbContext<AsilosAncianosContext>(options =>
+options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DBConnection")
+    )
+);
 
 var app = builder.Build();
 

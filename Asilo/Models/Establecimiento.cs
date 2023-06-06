@@ -21,9 +21,9 @@ public partial class Establecimiento
 
     public string? Direccion { get; set; }
 
-    public byte[] Latitud { get; set; } = null!;
+    public double Latitud { get; set; } //= null!;
 
-    public byte[] Longitud { get; set; } = null!;
+    public double Longitud { get; set; } //= null!;
 
     public string TipoEstablecimiento { get; set; } = null!;
 

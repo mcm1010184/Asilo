@@ -33,7 +33,9 @@ public partial class AsilosAncianosContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-T59A902;Initial Catalog=AsilosAncianos;User ID=sa;Password=Solamente603;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+    {
+        //optionsBuilder.UseSqlServer("Data Source = ANDY\\SQLEXPRESS; Initial Catalog = AsilosAncianos; Integrated Security = True");
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
