@@ -1,0 +1,59 @@
+﻿@model Asilo.Models.Donacion
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Donacion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="CampanaId" class="control-label"></label>
+                <select asp-for="CampanaId" class="form-control" asp-items="ViewBag.CampanaId"></select>
+                <span asp-validation-for="CampanaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BenefactorId" class="control-label"></label>
+                <select asp-for="BenefactorId" class="form-control" asp-items="ViewBag.BenefactorId"></select>
+                <span asp-validation-for="BenefactorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recibida" class="control-label"></label>
+                <input asp-for="Recibida" class="form-control" />
+                <span asp-validation-for="Recibida" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoBenefactor" class="control-label"></label>
+                <input asp-for="TipoBenefactor" class="form-control" />
+                <span asp-validation-for="TipoBenefactor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoDonacion" class="control-label"></label>
+                <input asp-for="TipoDonacion" class="form-control" />
+                <span asp-validation-for="TipoDonacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecolectorId" class="control-label"></label>
+                <select asp-for="RecolectorId" class="form-control" asp-items="ViewBag.RecolectorId"></select>
+                <span asp-validation-for="RecolectorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
