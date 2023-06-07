@@ -9,6 +9,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<p>
+    Lista de Campañas vigentes
+
+</p>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -19,22 +25,10 @@
                 @Html.DisplayNameFor(model => model.Requerimiento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaInicio)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.FechaCierre)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TipoCampaña)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaModificacion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Asilo)
@@ -44,40 +38,32 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Requerimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCierre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoCampaña)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaModificacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Asilo.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+            @if (DateTime.Now.Date <= item.FechaCierre.Date)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Requerimiento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaCierre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoCampaña)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Asilo.Nombre)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
 }
     </tbody>
 </table>
+<a class="btn btn-primary" asp-area="" asp-controller="Campanas" asp-action="Inactive">Lista de Capanas finalizadas</a>
