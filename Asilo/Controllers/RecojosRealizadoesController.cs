@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Asilo.Data;
 using Asilo.Models;
 using System.Security.Claims;
+using Microsoft.VisualBasic;
 
 namespace Asilo.Controllers
 {
@@ -120,7 +121,7 @@ namespace Asilo.Controllers
             {
                 try
                 {
-                    int idR = recojosRealizado.RecolectorId; 
+                    recojosRealizado.Fecha = DateTime.Now.Date;
                     recojosRealizado.Estado = 0;
                     _context.Update(recojosRealizado);
                     await _context.SaveChangesAsync();
