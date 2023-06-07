@@ -1,0 +1,95 @@
+﻿@model Asilo.Models.Campana
+
+@{
+    ViewData["Title"] = "DetailsInactive";
+}
+
+<h1>DetailsInactive</h1>
+@*
+   poner un boton de regresar a la lista de campañas inactivas
+*@
+
+<div>
+    <a asp-action="IndexInactive">Back to List</a>
+    <h4>Campana</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Requerimiento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Requerimiento)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaCierre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaCierre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoCampaña)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TipoCampaña)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Asilo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Asilo.Nombre)
+        </dd>
+        
+    </dl>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Donacion</th>
+                <th>Recivido</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Donacions)
+        {
+            if(item.CampanaId == item.Campana.Id)
+            {
+                if(item.BenefactorId == item.Benefactor.Id)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Benefactor.Nombres) @Html.DisplayFor(modelItem => item.Benefactor.Apellidos)
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.TipoDonacion)</td>
+                        <td>
+                            @if(item.Recibida == true)
+                            {
+                                <text>Si</text>
+                            }
+                            else
+                            {
+                                <text>No</text>
+                            }
+   
+                        </td>
+                    </tr>
+                }
+            }
+        }
+        </tbody>
+      
+    </table>
+</div>
+

@@ -26,6 +26,23 @@ namespace Asilo.Controllers
             return View(await asilosAncianosContext.ToListAsync());
         }
 
+
+        //Recojosrealizados/list
+        public async Task<IActionResult> List(int? id)
+        { 
+            var reccolectorsContext = await _context.Recolectors
+                .Include(r => r.Donacions)
+                .Include(r => r.RecojosRealizados)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (reccolectorsContext == null)
+            {
+                return NotFound();
+            }
+            return View(reccolectorsContext);
+        }
+        
+
         // GET: RecojosRealizadoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {

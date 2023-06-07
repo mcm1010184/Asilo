@@ -26,6 +26,13 @@ namespace Asilo.Controllers
             return View(await asilosAncianosContext.ToListAsync());
         }
 
+        //GET: Campanas/Inactive
+        public async Task<IActionResult> Inactive()
+        {
+            var asilosAncianosContext = _context.Campanas.Include(c => c.Asilo);
+            return View(await asilosAncianosContext.ToListAsync());
+        }
+
         // GET: Campanas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,6 +51,25 @@ namespace Asilo.Controllers
 
             return View(campana);
         }
+        //GET: Campanas/Details/5 (Inactive)
+        public async Task<IActionResult> DetailsInactive(int? id)
+        {
+            if (id == null || _context.Campanas == null)
+            {
+                return NotFound();
+            }
+            var campana = await _context.Campanas
+                .Include(c => c.Asilo)
+                .Include(c => c.Donacions)
+                .ThenInclude(d => d.Benefactor)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (campana == null)
+            {
+                return NotFound();
+            }
+            return View(campana);
+        }
+
 
         // GET: Campanas/Create
         public IActionResult Create()
