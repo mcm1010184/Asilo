@@ -25,12 +25,18 @@ namespace Asilo.Controllers
             var asilosAncianosContext = _context.Donacions.Include(d => d.Benefactor).Include(d => d.Campana).Include(d => d.Recolector);
             return View(await asilosAncianosContext.ToListAsync());
         }
+        public async Task<IActionResult> List()
+        {
+            var asilosAncianosContext = _context.Donacions.Include(d => d.Benefactor).Include(d => d.Campana);
+            return View(await asilosAncianosContext.ToListAsync());
+        }
 
         // GET: Donacions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Donacions == null)
             {
+
                 return NotFound();
             }
 
@@ -61,7 +67,7 @@ namespace Asilo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CampanaId,BenefactorId,Recibida,TipoBenefactor,TipoDonacion,RecolectorId")] Donacion donacion)
+        public async Task<IActionResult> Create([Bind("Id,CampanaId,BenefactorId,Cantidad,Descripcion,Recibida,TipoBenefactor,TipoDonacion,Fecha,RecolectorId")] Donacion donacion)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +105,7 @@ namespace Asilo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CampanaId,BenefactorId,Recibida,TipoBenefactor,TipoDonacion,RecolectorId")] Donacion donacion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CampanaId,BenefactorId,Recibida,TipoBenefactor,TipoDonacion,Fecha,RecolectorId")] Donacion donacion)
         {
             if (id != donacion.Id)
             {

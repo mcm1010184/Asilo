@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asilo.Data;
 using Asilo.Models;
+using System.Security.Claims;
 
 namespace Asilo.Controllers
 {
@@ -22,7 +23,20 @@ namespace Asilo.Controllers
         // GET: RecojosRealizadoes
         public async Task<IActionResult> Index()
         {
-            var asilosAncianosContext = _context.RecojosRealizados.Include(r => r.Establecimiento).Include(r => r.Recolector);
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var asilosAncianosContext = _context.RecojosRealizados
+                .Include(r => r.Establecimiento)
+                .Include(r => r.Recolector)
+                .Where(x => x.Fecha == DateTime.Now.Date && x.EstablecimientoId == int.Parse(userId) && x.Estado == 1);
+            return View(await asilosAncianosContext.ToListAsync());
+        }
+        public async Task<IActionResult> List()
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var asilosAncianosContext = _context.RecojosRealizados
+                .Include(r => r.Establecimiento)
+                .Include(r => r.Recolector)
+                .Where(x =>x.EstablecimientoId == int.Parse(userId) && x.Estado == 0);
             return View(await asilosAncianosContext.ToListAsync());
         }
 
@@ -85,8 +99,8 @@ namespace Asilo.Controllers
             {
                 return NotFound();
             }
-            ViewData["EstablecimientoId"] = new SelectList(_context.Establecimientos, "Id", "Id", recojosRealizado.EstablecimientoId);
-            ViewData["RecolectorId"] = new SelectList(_context.Recolectors, "Id", "Id", recojosRealizado.RecolectorId);
+            ViewData["EstablecimientoId"] = new SelectList(_context.Establecimientos, "Id", "Nombre", recojosRealizado.EstablecimientoId);
+            ViewData["RecolectorId"] = new SelectList(_context.Recolectors, "Id", "Nonbre",recojosRealizado.RecolectorId);
             return View(recojosRealizado);
         }
 
@@ -106,6 +120,8 @@ namespace Asilo.Controllers
             {
                 try
                 {
+                    int idR = recojosRealizado.RecolectorId; 
+                    recojosRealizado.Estado = 0;
                     _context.Update(recojosRealizado);
                     await _context.SaveChangesAsync();
                 }

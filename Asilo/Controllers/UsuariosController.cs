@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asilo.Data;
 using Asilo.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace Asilo.Controllers
 {
@@ -19,81 +22,76 @@ namespace Asilo.Controllers
             _context = context;
         }
 
-        // GET: Usuarios
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var asilosAncianosContext = _context.Usuarios.Include(u => u.IdNavigation);
-            return View(await asilosAncianosContext.ToListAsync());
-        }
-
-        // GET: Usuarios/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Usuarios == null)
-            {
-                return NotFound();
-            }
-
-            var usuario = await _context.Usuarios
-                .Include(u => u.IdNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-
-            return View(usuario);
-        }
-
-        // GET: Usuarios/Create
-        public IActionResult Create()
-        {
-            ViewData["Id"] = new SelectList(_context.Establecimientos, "Id", "Id");
             return View();
         }
 
-        // POST: Usuarios/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Usuario1,Password,Role,Estado,FechaRegistro,FechaModificacion")] Usuario usuario)
+        public async Task<IActionResult> Index(Usuario userf)
         {
-            if (ModelState.IsValid)
+            var userLogin = from usr in _context.Usuarios
+                            where usr.Usuario1 == userf.Usuario1 && usr.Password == userf.Password
+                            select new
+                            {
+                                userID = usr.Id,
+                                Name = usr.Usuario1,
+                                Password = usr.Password,
+                                RolName = usr.Role
+                            };
+            if (userLogin.Count() != 0)
             {
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["Id"] = new SelectList(_context.Establecimientos, "Id", "Id", usuario.Id);
-            return View(usuario);
-        }
+                string rol = userLogin.First().RolName;
+                string name = userLogin.First().Name;
+                int id = userLogin.First().userID;
+                var claims = new List<Claim>{
+                    new Claim(ClaimTypes.Name, name),
+                    new Claim(ClaimTypes.Role, rol),
+                   new Claim(ClaimTypes.NameIdentifier, id.ToString())
+                };
+                var clainsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(clainsIdentity));
+                return RedirectToAction("Index", "Home");
 
-        // GET: Usuarios/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+            }
+            else
+            {
+                ViewData["message"] = "Nombre de Usuario/Contraseña incorrectos";
+                return View();
+            }
+        }
+        public async Task<IActionResult> LogOut()
         {
-            if (id == null || _context.Usuarios == null)
+            //Matamos a la cookie
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Usuarios");
+        }
+        // GET: Users1/Edit/5
+        /*public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            ViewData["Id"] = new SelectList(_context.Establecimientos, "Id", "Id", usuario.Id);
-            return View(usuario);
+            ViewData["Id"] = new SelectList(_context.People, "Id", "FirstName", user.Id);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "RolName", user.RoleId);
+            return View(user);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Users1/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Usuario1,Password,Role,Estado,FechaRegistro,FechaModificacion")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Password,RoleId,Status,RegisterDate,UpdateDate,UserId")] User user)
         {
-            if (id != usuario.Id)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -102,12 +100,13 @@ namespace Asilo.Controllers
             {
                 try
                 {
-                    _context.Update(usuario);
+                    user.RegisterDate = DateTime.Now;
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsuarioExists(usuario.Id))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -116,53 +115,56 @@ namespace Asilo.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
-            ViewData["Id"] = new SelectList(_context.Establecimientos, "Id", "Id", usuario.Id);
-            return View(usuario);
+            ViewData["Id"] = new SelectList(_context.People, "Id", "FirstName", user.Id);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "rolName", user.RoleId);
+            return View(user);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Users1/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Usuarios == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios
+            var user = await _context.Users
                 .Include(u => u.IdNavigation)
+                .Include(u => u.Role)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(usuario);
+            return View(user);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Users1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Usuarios == null)
+            if (_context.Users == null)
             {
-                return Problem("Entity set 'AsilosAncianosContext.Usuarios'  is null.");
+                return Problem("Entity set 'dbBeatoSalomonContext.Users'  is null.");
             }
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario != null)
+            var user = await _context.Users.FindAsync(id);
+            if (user != null)
             {
-                _context.Usuarios.Remove(usuario);
+                user.Status = 0;
+                _context.Users.Update(user);
             }
-            
+
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
-        private bool UsuarioExists(int id)
+        private bool UserExists(int id)
         {
-          return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+            return _context.Users.Any(e => e.Id == id);
+        }*/
     }
 }

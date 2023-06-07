@@ -16,21 +16,14 @@ public partial class AsilosAncianosContext : DbContext
     {
     }
 
-    public virtual DbSet<Benefactor> Benefactors { get; set; }
-
-    public virtual DbSet<Campana> Campanas { get; set; }
-
-    public virtual DbSet<Donacion> Donacions { get; set; }
-
-    public virtual DbSet<Establecimiento> Establecimientos { get; set; }
-
-    public virtual DbSet<Imagen> Imagens { get; set; }
-
-    public virtual DbSet<RecojosRealizado> RecojosRealizados { get; set; }
-
-    public virtual DbSet<Recolector> Recolectors { get; set; }
-
-    public virtual DbSet<Usuario> Usuarios { get; set; }
+    public  DbSet<Benefactor> Benefactors { get; set; }
+    public  DbSet<Campana> Campanas { get; set; }
+    public  DbSet<Donacion> Donacions { get; set; }
+    public  DbSet<Establecimiento> Establecimientos { get; set; }
+    public  DbSet<Imagen> Imagens { get; set; }
+    public  DbSet<RecojosRealizado> RecojosRealizados { get; set; }
+    public  DbSet<Recolector> Recolectors { get; set; }
+    public  DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Data Source=DESKTOP-T59A902;Initial Catalog=AsilosAncianos;User ID=sa;Password=Solamente603;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
@@ -44,7 +37,7 @@ public partial class AsilosAncianosContext : DbContext
             entity.ToTable("Benefactor");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Apellidos)
                 .HasMaxLength(150)
@@ -85,7 +78,7 @@ public partial class AsilosAncianosContext : DbContext
             entity.ToTable("Campana");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.AsiloId).HasColumnName("asiloId");
+            entity.Property(e => e.EstablecimientoID).HasColumnName("establecimientoID");
             entity.Property(e => e.Estado)
                 .HasDefaultValueSql("((1))")
                 .HasColumnName("estado");
@@ -115,7 +108,7 @@ public partial class AsilosAncianosContext : DbContext
                 .HasColumnName("tipoCampaña");
 
             entity.HasOne(d => d.Asilo).WithMany(p => p.Campanas)
-                .HasForeignKey(d => d.AsiloId)
+                .HasForeignKey(d => d.EstablecimientoID)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Campana__asilo_i__267ABA7A");
         });
@@ -129,6 +122,13 @@ public partial class AsilosAncianosContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.BenefactorId).HasColumnName("benefactorId");
             entity.Property(e => e.CampanaId).HasColumnName("campanaId");
+            entity.Property(e => e.Cantidad)
+               .HasDefaultValueSql("((1))")
+               .HasColumnName("cantidad");
+            entity.Property(e => e.Descripcion)
+               .HasMaxLength(255)
+               .IsUnicode(false)
+               .HasColumnName("descripcion");
             entity.Property(e => e.Recibida)
                 .HasDefaultValueSql("((0))")
                 .HasColumnName("recibida");
@@ -140,7 +140,9 @@ public partial class AsilosAncianosContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("tipoDonacion");
-
+            entity.Property(e => e.Fecha)
+                .HasColumnType("date")
+                .HasColumnName("fecha");
             entity.HasOne(d => d.Benefactor).WithMany(p => p.Donacions)
                 .HasForeignKey(d => d.BenefactorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -163,7 +165,9 @@ public partial class AsilosAncianosContext : DbContext
 
             entity.ToTable("Establecimiento");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id")
+            .ValueGeneratedNever();
+
             entity.Property(e => e.Celular).HasColumnName("celular");
             entity.Property(e => e.Direccion)
                 .HasMaxLength(70)
@@ -220,6 +224,9 @@ public partial class AsilosAncianosContext : DbContext
             entity.Property(e => e.Fecha)
                 .HasColumnType("date")
                 .HasColumnName("fecha");
+            entity.Property(e => e.Estado)
+               .HasDefaultValueSql("((1))")
+               .HasColumnName("estado");
             entity.Property(e => e.RecolectorId).HasColumnName("recolectorId");
 
             entity.HasOne(d => d.Establecimiento).WithMany(p => p.RecojosRealizados)
@@ -238,7 +245,7 @@ public partial class AsilosAncianosContext : DbContext
             entity.ToTable("Recolector");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Apellido)
                 .HasMaxLength(50)
@@ -269,7 +276,7 @@ public partial class AsilosAncianosContext : DbContext
             entity.ToTable("Usuario");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.Estado)
                 .HasDefaultValueSql("((1))")
@@ -304,4 +311,7 @@ public partial class AsilosAncianosContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    public DbSet<TEstablecimientoUser> TEstablecimientoUser { get; set; }
+
 }

@@ -4,12 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de donaciones que tienes</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table table-success">
     <thead>
         <tr>
             <th>
@@ -34,18 +31,17 @@
                 @Html.DisplayFor(modelItem => item.Cantidad)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
+                @Html.DisplayFor(modelItem => item.Fecha.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Establecimiento.Id)
+                @Html.DisplayFor(modelItem => item.Establecimiento.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Recolector.Id)
+                @Html.DisplayFor(modelItem => item.Recolector.Nonbre)
+                @Html.DisplayFor(modelItem => item.Recolector.Apellido)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Recojo listo</a> |
             </td>
         </tr>
 }

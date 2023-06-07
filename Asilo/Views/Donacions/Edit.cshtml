@@ -39,6 +39,11 @@
                 <span asp-validation-for="TipoDonacion" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="RecolectorId" class="control-label"></label>
                 <select asp-for="RecolectorId" class="form-control" asp-items="ViewBag.RecolectorId"></select>
                 <span asp-validation-for="RecolectorId" class="text-danger"></span>

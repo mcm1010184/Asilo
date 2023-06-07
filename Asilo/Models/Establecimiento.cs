@@ -21,15 +21,14 @@ public partial class Establecimiento
 
     public string? Direccion { get; set; }
 
-    public byte[] Latitud { get; set; } = null!;
-
-    public byte[] Longitud { get; set; } = null!;
+    public double? Latitud { get; set; }
+    public double? Longitud { get; set; }
 
     public string TipoEstablecimiento { get; set; } = null!;
 
-    public virtual ICollection<Campana> Campanas { get; set; } = new List<Campana>();
+    public  ICollection<Campana>? Campanas { get; set; } = new List<Campana>();
 
-    public virtual ICollection<RecojosRealizado> RecojosRealizados { get; set; } = new List<RecojosRealizado>();
+    public  ICollection<RecojosRealizado>? RecojosRealizados { get; set; } = new List<RecojosRealizado>();
 
-    public virtual Usuario? Usuario { get; set; }
+    public  Usuario? Usuario { get; set; }
 }

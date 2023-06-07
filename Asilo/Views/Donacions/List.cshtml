@@ -4,18 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de recojos de hoy</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table table-primary">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Recibida)
             </th>
-           
+
             <th>
                 @Html.DisplayNameFor(model => model.TipoDonacion)
             </th>
@@ -32,9 +29,10 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
                     @if (item.Recibida == false)
                     {
                         <text>Recibido</text>
@@ -43,12 +41,12 @@
                     {
                         <text>En espera</text>
                     }
-            </td>
-      
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoDonacion)
-            </td>
-            <td>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoDonacion)
+                </td>
+                <td>
                     @if (item.TipoBenefactor == 1)
                     {
                         @Html.DisplayFor(modelItem => item.Benefactor.Nombres)
@@ -58,19 +56,19 @@
                     {
                         <text>Anonimo</text>
                     }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Campana.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Recolector.Nonbre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Campana.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Recolector.Nonbre)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

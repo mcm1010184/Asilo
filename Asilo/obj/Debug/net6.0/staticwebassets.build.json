@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LM/h2DBkCjNkur9CRw+ddzMO7rTcvd3w421ibPTQKDM=",
+  "Hash": "r+gbTpXGENIpAzhmg/rHjLT13k39xIWxCA5WWQSP1vo=",
   "Source": "Asilo",
   "BasePath": "_content/Asilo",
   "Mode": "Default",
@@ -66,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\css\\style-starter.css",
+      "SourceId": "Asilo",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\",
+      "BasePath": "_content/Asilo",
+      "RelativePath": "css/style-starter.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\style-starter.css"
     },
     {
       "Identity": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\favicon.ico",

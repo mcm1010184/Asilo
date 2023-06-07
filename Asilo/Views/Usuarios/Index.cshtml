@@ -1,71 +1,57 @@
-﻿@model IEnumerable<Asilo.Models.Usuario>
+﻿@model Usuario
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = null;
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hogar Asilo</title>
+    <link href="//fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style-starter.css">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaModificacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaModificacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNavigation.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+</head>
+
+<body>
+    <section class="w3l-about-breadcrumb text-left">
+        <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+            <div class="container">
+                <h2 class="title">Inicia Sesión</h2>
+                <ul class="breadcrumbs-custom-path mt-2">
+                    <li><a href="#url">Hogar</a></li>
+                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Inicia Sesión </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div class="contact-form py-5" id="contact">
+        <div class="container py-lg-5 py-md-4">
+            <h3 class="hny-title mb-lg-5 mb-4">INICIA SESION</h3>
+            <div class="contacts12-main mb-5">
+                <form asp-action="Index">
+                    <div class="main-input">
+                        <div class="d-grid">
+                            <input asp-for="Usuario1" placeholder="Nombre Usuario" class="contact-input" />
+                        </div>
+                        <div class="d-grid">
+                            <input type="password" asp-for="Password" placeholder="Contraseña" class="contact-input" />
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-style btn-secondary btn-contact" type="submit">Iniciar</button>
+                    </div>
+                    @ViewData["message"];
+                </form>
+                <p>
+                    Si no recureda su contraseña comuniquese con el Administrador o Encargado del Sistema
+                </p>
+            </div>
+        </div>
+    </div>
+  
+</body>
+</html>

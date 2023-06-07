@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\css\\style-starter.css",
+      "PackagePath": "staticwebassets\\css\\style-starter.css"
+    },
+    {
       "Id": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

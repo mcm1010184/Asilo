@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Lista de recojos</h1>
 
-<h4>RecojosRealizado</h4>
+<h4>Lista de recojos de hoy</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,34 +15,33 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="EstablecimientoId" class="control-label"></label>
-                <select asp-for="EstablecimientoId" class="form-control" asp-items="ViewBag.EstablecimientoId"></select>
+                <select asp-for="EstablecimientoId" class="form-control" asp-items="ViewBag.EstablecimientoId" disabled></select>
                 <span asp-validation-for="EstablecimientoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RecolectorId" class="control-label"></label>
-                <select asp-for="RecolectorId" class="form-control" asp-items="ViewBag.RecolectorId"></select>
+                <select asp-for="RecolectorId" class="form-control" asp-items="ViewBag.RecolectorId" disabled></select>
                 <span asp-validation-for="RecolectorId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
+                <input asp-for="Cantidad" class="form-control" readonly />
                 <span asp-validation-for="Cantidad" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Fecha" class="control-label"></label>
-                <input asp-for="Fecha" class="form-control" />
+                <input asp-for="Fecha" class="form-control" readonly />
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Si recibi todo" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-danger">Regresar a la lista</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

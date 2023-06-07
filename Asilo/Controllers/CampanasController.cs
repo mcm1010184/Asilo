@@ -65,7 +65,7 @@ namespace Asilo.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.AsiloId);
+            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.EstablecimientoID);
             return View(campana);
         }
 
@@ -82,7 +82,7 @@ namespace Asilo.Controllers
             {
                 return NotFound();
             }
-            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.AsiloId);
+            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.EstablecimientoID);
             return View(campana);
         }
 
@@ -118,7 +118,7 @@ namespace Asilo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.AsiloId);
+            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.EstablecimientoID);
             return View(campana);
         }
 

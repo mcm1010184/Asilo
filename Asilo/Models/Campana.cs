@@ -7,7 +7,6 @@ public partial class Campana
 {
     public int Id { get; set; }
 
-    public int AsiloId { get; set; }
 
     public string Nombre { get; set; } = null!;
 
@@ -19,6 +18,7 @@ public partial class Campana
 
     public string? TipoCampaña { get; set; }
 
+    public int? EstablecimientoID { get; set; }
     public byte Estado { get; set; }
 
     public DateTime FechaRegistro { get; set; }
