@@ -11,6 +11,13 @@ builder.Services.AddDbContext<AsilosAncianosContext>(options =>
         )
     );
 
+// Referencia(s) a la cadena de conexión
+builder.Services.AddDbContext<AsilosAncianosContext>(options =>
+options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DBConnection")
+    )
+);
+
 var app = builder.Build();
 
 
