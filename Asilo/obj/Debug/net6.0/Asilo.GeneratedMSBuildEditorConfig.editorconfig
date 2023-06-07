@@ -48,8 +48,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/PPG/PROYECTO ATREVETE/Web/Asilo/Asilo/Views/Campanas/DetailsInactive.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcRGV0YWlsc0luYWN0aXZlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/PPG/PROYECTO ATREVETE/Web/Asilo/Asilo/Views/Campanas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/PPG/PROYECTO ATREVETE/Web/Asilo/Asilo/Views/Campanas/Inactive.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcSW5hY3RpdmUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/PPG/PROYECTO ATREVETE/Web/Asilo/Asilo/Views/Campanas/Index.cshtml]
@@ -142,6 +150,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/PPG/PROYECTO ATREVETE/Web/Asilo/Asilo/Views/RecojosRealizadoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2pvc1JlYWxpemFkb2VzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/PPG/PROYECTO ATREVETE/Web/Asilo/Asilo/Views/RecojosRealizadoes/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2pvc1JlYWxpemFkb2VzXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/PPG/PROYECTO ATREVETE/Web/Asilo/Asilo/Views/Recolectors/Create.cshtml]

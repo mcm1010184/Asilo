@@ -28,8 +28,9 @@
                 @Html.DisplayNameFor(model => model.Celular)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdNavigation)
+                ver lista de recojos 
             </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -52,12 +53,13 @@
                 @Html.DisplayFor(modelItem => item.Celular)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdNavigation.Id)
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="RecojosRealizadoes" asp-action="List" asp-route-id="@item.Id">ver lista de recojos</a>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
             </td>
         </tr>
 }

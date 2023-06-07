@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Asilo.Models.Campana>
+@{
+ViewData["Title"] = "Inactive";
+}
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <a asp-action="Index" class="btn btn-default">Back to List</a>
+    </div>
+</div>
+<p>
+    Lista de Campañas vigentes
+
+</p>
+<!--que se vean en cajones responsivos, tega un marco negro  y no en una lista -->
+<div class="row"  >
+    @foreach (var item in Model)
+    {
+        if (DateTime.Now.Date >item.FechaCierre.Date)
+        {
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
+                        <p>@Html.DisplayFor(modelItem => item.Requerimiento)</p>
+                        <p>@Html.DisplayFor(modelItem => item.FechaCierre)</p>
+                        <p>@Html.DisplayFor(modelItem => item.TipoCampaña)</p>
+                        <p>@Html.DisplayFor(modelItem => item.Asilo.Nombre)</p>
+                        <p>
+                            <a asp-action="DetailsInactive" asp-route-id="@item.Id">Details</a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
