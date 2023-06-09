@@ -7,17 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asilo.Data;
 using Asilo.Models;
+using MongoDB.Driver;
 
 namespace Asilo.Controllers
 {
     public class EstablecimientoesController : Controller
     {
         private readonly AsilosAncianosContext _context;
+        private readonly IMongoClient _mongoClient;
+        private readonly IMongoCollection<UsuarioEstablecimiento> _mongoCollection;
 
-        public EstablecimientoesController(AsilosAncianosContext context)
+        public EstablecimientoesController(AsilosAncianosContext context, IMongoClient mongoClient)
         {
             _context = context;
+            _mongoClient = mongoClient;
+            _mongoCollection = _mongoClient.GetDatabase("AsilosAncianos").GetCollection<UsuarioEstablecimiento>("usuarios");
         }
+    
+
 
         // GET: Establecimientoes
         public async Task<IActionResult> Index()
@@ -70,6 +77,14 @@ namespace Asilo.Controllers
         // GET: Establecimientoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var dbEstablecimiento = _context.Establecimientos;
+            var LatitudE = (from x in dbEstablecimiento
+                             select x.Latitud);
+            ViewData["LatitudE"] = LatitudE;
+            var LongitudE = (from x in dbEstablecimiento
+                            select x.Longitud);
+            ViewData["LongitudE"] = LongitudE;
+
             if (id == null || _context.Establecimientos == null)
             {
                 return NotFound();
@@ -101,6 +116,26 @@ namespace Asilo.Controllers
                 {
                     _context.Update(establecimiento);
                     await _context.SaveChangesAsync();
+
+                    var filter = Builders<UsuarioEstablecimiento>.Filter.Eq(e => e.IdAux, id);
+                    var update = Builders<UsuarioEstablecimiento>.Update
+                        .Set(e => e.nombre, establecimiento.Nombre)
+                        .Set(e => e.nit, establecimiento.Nit)
+                        .Set(e => e.representantePrincipal, establecimiento.RepresentantePrincipal)
+                        .Set(e => e.correoElectrónico, establecimiento.Email)
+                        .Set(e => e.telefono, establecimiento.Telefono)
+                        .Set(e => e.celular, establecimiento.Celular)
+                        .Set(e => e.direccion, establecimiento.Direccion)
+                        .Set(e => e.latitud, establecimiento.Latitud)
+                        .Set(e => e.longitud, establecimiento.Longitud)
+                        .Set(e => e.tipoEstablecimiento, establecimiento.TipoEstablecimiento);
+
+                    var updateResult = await _mongoCollection.UpdateOneAsync(filter, update);
+
+                    if (updateResult.ModifiedCount == 0)
+                    {
+                        // Manejar el caso cuando el documento no existe en MongoDB o no se modificó correctamente
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -115,6 +150,7 @@ namespace Asilo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             return View(establecimiento);
         }
 
@@ -141,18 +177,28 @@ namespace Asilo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Establecimientos == null)
+            var tPersonPasient = await _context.Usuarios
+                .FirstOrDefaultAsync(m => m.Id == id);
+            try
             {
-                return Problem("Entity set 'AsilosAncianosContext.Establecimientos'  is null.");
+                tPersonPasient.Estado = 0;
+                _context.Update(tPersonPasient);
+                await _context.SaveChangesAsync();
+
+                var filter = Builders<UsuarioEstablecimiento>.Filter.Eq(r => r.IdAux, id);
+                var update = Builders<UsuarioEstablecimiento>.Update
+                    .Set(r => r.estado, 0);
+
+
+                var updateResult = await _mongoCollection.UpdateOneAsync(filter, update);
+
             }
-            var establecimiento = await _context.Establecimientos.FindAsync(id);
-            if (establecimiento != null)
+            catch (Exception)
             {
-                _context.Establecimientos.Remove(establecimiento);
+
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction("Index", "TEstablecimientoUsers");
         }
 
         private bool EstablecimientoExists(int id)

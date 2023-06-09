@@ -28,7 +28,7 @@ namespace Asilo.Controllers
             var asilosAncianosContext = _context.RecojosRealizados
                 .Include(r => r.Establecimiento)
                 .Include(r => r.Recolector)
-                .Where(x => x.Fecha == DateTime.Now.Date && x.EstablecimientoId == int.Parse(userId) && x.Estado == 1);
+                .Where(x => x.Fecha == DateTime.Now.Date && x.EstablecimientoId == int.Parse(userId) && x.Estado == 0);
             return View(await asilosAncianosContext.ToListAsync());
         }
         public async Task<IActionResult> List()
@@ -37,9 +37,24 @@ namespace Asilo.Controllers
             var asilosAncianosContext = _context.RecojosRealizados
                 .Include(r => r.Establecimiento)
                 .Include(r => r.Recolector)
-                .Where(x =>x.EstablecimientoId == int.Parse(userId) && x.Estado == 0);
+                .Where(x =>x.EstablecimientoId == int.Parse(userId) && x.Estado == 1);
             return View(await asilosAncianosContext.ToListAsync());
         }
+        public async Task<IActionResult> List1(int? id)
+        {
+            var reccolectorsContext = await _context.Recolectors
+                .Include(r => r.Donacions)
+                .Include(r => r.RecojosRealizados)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (reccolectorsContext == null)
+            {
+                return NotFound();
+            }
+            return View(reccolectorsContext);
+        }
+
+
 
         // GET: RecojosRealizadoes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -122,7 +137,7 @@ namespace Asilo.Controllers
                 try
                 {
                     recojosRealizado.Fecha = DateTime.Now.Date;
-                    recojosRealizado.Estado = 0;
+                    recojosRealizado.Estado = 1;
                     _context.Update(recojosRealizado);
                     await _context.SaveChangesAsync();
                 }

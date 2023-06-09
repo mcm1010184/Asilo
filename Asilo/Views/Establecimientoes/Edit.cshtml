@@ -3,8 +3,13 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Edit</h1>
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+<h1>Modificar</h1>
 
 <h4>Establecimiento</h4>
 <hr />
@@ -63,8 +68,49 @@
                 <input asp-for="TipoEstablecimiento" class="form-control" />
                 <span asp-validation-for="TipoEstablecimiento" class="text-danger"></span>
             </div>
+            <div id="map">
+            </div>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSce5nXAFJC6gZr-dBEWz8Te91I20nSiE&callback=initMap"></script>
+
+            <script>
+                function initMap() {
+                    // Obtiene los valores iniciales de latitud y longitud desde los campos de entrada
+                    var latitud = parseFloat(document.getElementById('Latitud').value);
+                    var longitud = parseFloat(document.getElementById('Longitud').value);
+
+                    // Verifica si los valores son válidos, de lo contrario, utiliza un valor predeterminado
+                    if (isNaN(latitud) || isNaN(longitud)) {
+                        latitud = -17.380694428831475;
+                        longitud = -66.16026984351957;
+                    }
+
+                    // Establece las coordenadas iniciales del mapa
+                    var myLatLng = { lat: latitud, lng: longitud };
+
+                    // Crea un nuevo mapa y establece su centro y nivel de zoom
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 15,
+                        center: myLatLng
+                    });
+
+                    // Crea un nuevo marcador y agrégalo al mapa
+                    var marker = new google.maps.Marker({
+                        position: myLatLng,
+                        map: map,
+                        draggable: true,
+                        title: '¡Arrástrame!'
+                    });
+
+                    // Agrega un escuchador de eventos al marcador para actualizar los campos de latitud y longitud cuando se arrastre
+                    marker.addListener('dragend', function () {
+                        document.getElementById('Latitud').value = marker.getPosition().lat();
+                        document.getElementById('Longitud').value = marker.getPosition().lng();
+                    });
+                }
+            </script>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Modificar" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -75,5 +121,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

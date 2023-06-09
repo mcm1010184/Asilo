@@ -4,80 +4,90 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+
+<style>
+    /* Estilos para la tabla */
+    .manage-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .manage-table th, .manage-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .manage-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .manage-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+    /* Estilos para las imágenes */
+    .campaign-image {
+        max-height: 100.57px;
+        max-width: 238.35px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: transform 0.3s;
+    }
+
+        .campaign-image:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            transform: scale(1.1);
+        }
+</style>
+
+<h1>Mis Campañas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Crear uno nuevo</a>
 </p>
-<table class="table">
+<table class="manage-table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Requerimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCierre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoCampaña)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaModificacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstablecimientoID)
-            </th>
-            <th></th>
+            <th>Imagen</th>
+            <th>Nombre Campaña</th>
+            <th>Requerimiento</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Requerimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCierre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoCampaña)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaModificacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstablecimientoID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="listing-photoo">
+                    @{
+                        var imagenBase64 = string.Empty;
+                        var primeraImagen = item.Imagens.FirstOrDefault();
+
+                        if (primeraImagen != null && primeraImagen.Imagen1 != null)
+                        {
+                            imagenBase64 = Convert.ToBase64String(primeraImagen.Imagen1);
+                        }
+                    }
+                    @if (!string.IsNullOrEmpty(imagenBase64))
+                    {
+                        <img src="data:image/jpeg;base64,@imagenBase64" alt="avatar" class="campaign-image" />
+                    }
+                    else
+                    {
+                        <img src="~/img/properties/properties-1.png" alt="listing-photo" class="img-fluid campaign-image">
+                    }
+                </td>
+                <td class="title-container">
+                    <h2><a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Nombre)</a></h2>
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Requerimiento)</td>
+                <td class="action">
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil"></i>Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="delete"><i class="fa fa-remove"></i>Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

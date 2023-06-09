@@ -8,8 +8,6 @@
                 Asilo Feliz
             </h1>
             <div class="col-lg-6">
-
-              
                 <p class="my-3 pr-lg-4">
                     En nuestros ambientes se ofreceran consultas, recolectas
                     para toda la poblacion que necesita ayuda. Tambien contamos con especialistas
@@ -27,13 +25,32 @@
 <section class="w3l-grids-1 py-1" id="about">
     <div class="container py-md-1">
         <div class="row bottom-ab-grids align-items-center text-center">
-         
+            <div class="col-lg-6 bottom-ab-left pr-lg-5">
+                <a class="btn btn-success btn-secondary mt-4" asp-area="" asp-controller="Campanas" asp-action="Index1">Campañas Vigentes</a>
+            </div>
+            <div class="col-lg-6 bottom-ab-left pr-lg-5">
+                <a class="btn btn-success btn-secondary mt-4" asp-area="" asp-controller="Campanas" asp-action="IndexCerradas">Campañas Cerradas</a>
+            </div> 
             @if (User.IsInRole("Administrador"))
             {
                 <div class="col-lg-6 bottom-ab-left pr-lg-5">
                     <a class="btn btn-success btn-secondary mt-4" asp-action="Create" asp-controller="TEstablecimientousers">Registrar Establecimientos</a>
                 </div>
-             
+                <div class="col-lg-6 bottom-ab-left pr-lg-5">
+                    <a class="btn btn-success" asp-area="" asp-controller="Recolectors" asp-action="Index">Recolectores</a>
+
+                </div>
+                <div class="col-lg-6 bottom-ab-left pr-lg-5">
+                    <a class="btn btn-success" asp-area="" asp-controller="Establecimientoes" asp-action="Index">Establecimiento</a>
+
+                </div>
+            }
+            @if (User.IsInRole("Recolector"))
+            {
+                <div class="col-lg-6 bottom-ab-left pr-lg-5">
+                    <a class="btn btn-success btn-secondary mt-4" asp-action="ListRecoec" asp-controller="Donacions">Ver lista donaciones</a>
+                </div>
+                
             }
             @if (User.IsInRole("Establecimiento"))
             {
@@ -45,6 +62,19 @@
                 </div>
                 <div class="col-lg-6 bottom-ab-left pr-lg-5">
                     <a class="btn btn-success btn-secondary mt-4" asp-action="List" asp-controller="RecojosRealizadoes">Ver lista donaciones recibidas</a>
+                </div>
+                <div class="col-lg-6 bottom-ab-left pr-lg-5">
+                    <a class="btn btn-success btn-secondary mt-4" asp-area="" asp-controller="Campanas" asp-action="Index">Mis Campañas</a>
+                </div >
+                <div class="col-lg-6 bottom-ab-left pr-lg-5">
+                    <a class="btn btn-success btn-secondary mt-4" asp-area="" asp-controller="Recolectors" asp-action="Index1">Recolectores Autorizados</a>
+
+                </div>
+                <div class="col-lg-6 bottom-ab-left pr-lg-5">
+                    <a asp-controller="Campanas" asp-action="Create" class="btn btn-success btn-secondary mt-4">Crear Campaña</a>
+                </div>
+                <div class="col-lg-6 bottom-ab-left pr-lg-5">
+                    <a class="btn btn-success btn-secondary mt-4" asp-area="" asp-controller="Donacions" asp-action="ReporteDonaciones">ReporteDonaciones</a>
                 </div>
             }
         </div>

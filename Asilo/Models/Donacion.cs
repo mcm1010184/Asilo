@@ -1,9 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
 
 namespace Asilo.Models;
-
+public class DonacionMongo
+{
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
+    public int? Recolector { get; set; }
+    public int? Campana { get; set; }
+    public int? Benefactor { get; set; }
+    public int? Cantidad { get; set; }
+    public string? Description { get; set; }
+    public string? TipoDonacion { get; set; }
+    public int TipoBeneficiario { get; set; }
+    public DateTime FechaDonacion { get; set; }
+    public int Recibida { get; set; }
+    public int Estado { get; set; }
+    public DateTime FechaRegistro { get; set; }
+    public DateTime? FechaActualizada { get; set; }
+}
 public partial class Donacion
 {
     public int Id { get; set; }
@@ -19,7 +40,7 @@ public partial class Donacion
 
     public byte? TipoBenefactor { get; set; }
 
-    public string TipoDonacion { get; set; } = null!;
+    public string TipoDonacion { get; set; } = "Viveres";
     public DateTime Fecha { get; set; }
 
     public int RecolectorId { get; set; }

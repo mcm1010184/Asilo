@@ -7,27 +7,100 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asilo.Data;
 using Asilo.Models;
+using MongoDB.Driver;
+using System.Security.Claims;
+using Azure;
 
 namespace Asilo.Controllers
 {
     public class CampanasController : Controller
     {
         private readonly AsilosAncianosContext _context;
+        private readonly IMongoClient _mongoClient;
+        private readonly IMongoCollection<Campana> _mongoCollection;
 
-        public CampanasController(AsilosAncianosContext context)
+        public CampanasController(AsilosAncianosContext context, IMongoClient mongoClient)
         {
             _context = context;
+            _mongoClient = mongoClient;
+            _mongoCollection = _mongoClient.GetDatabase("AsilosAncianos").GetCollection<Campana>("campana");
         }
 
         // GET: Campanas
         public async Task<IActionResult> Index()
         {
-            var asilosAncianosContext = _context.Campanas.Include(c => c.Asilo);
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var asilosAncianosContext = _context.Campanas
+                 .Where(l => l.Estado == 1 && l.EstablecimientoId == int.Parse(userId))
+                .Include(c => c.Establecimiento)
+                .Include(c => c.Imagens);
+            return View(await asilosAncianosContext.ToListAsync());
+        }
+        public async Task<IActionResult> IndexCerradas()
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var campañasCerradas = await _context.Campanas
+               .Where(c => c.FechaCierre < DateTime.Now && c.EstablecimientoId == int.Parse(userId)) // Filtrar campañas cerradas
+               .Include(c => c.Donacions)
+               .ToListAsync();
+
+            var benefactoresPorCampana = new Dictionary<int, List<string>>();
+
+            foreach (var campana in campañasCerradas)
+            {
+                var donaciones = await _context.Donacions
+                    .Where(d => d.CampanaId == campana.Id)
+                    .ToListAsync();
+
+                var benefactoresCampana = new List<string>();
+
+                foreach (var donacion in donaciones)
+                {
+                    if (donacion.TipoBenefactor == 0)
+                    {
+                        benefactoresCampana.Add("Donación anónima");
+                    }
+                    else
+                    {
+                        if (donacion.TipoBenefactor == 1)
+                        {
+                            var benefactor = await _context.Benefactors.FindAsync(donacion.BenefactorId);
+
+                            if (benefactor != null)
+                            {
+                                benefactoresCampana.Add(benefactor.Nombres);
+                            }
+                        }
+                    }
+                }
+
+                benefactoresPorCampana.Add(campana.Id, benefactoresCampana);
+            }
+
+            ViewData["BenefactoresPorCampana"] = benefactoresPorCampana;
+
+            return View("IndexCerradas", campañasCerradas); // Pasar el contexto de base de datos a la vista utilizando el método View
+        }
+
+        // GET: Campanas
+        public async Task<IActionResult> Index1()
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var asilosAncianosContext = _context.Campanas.Include(c => c.Establecimiento)
+                .Where(x => x.FechaCierre >= DateTime.Now.Date);
+            return View(await asilosAncianosContext.ToListAsync());
+        }
+
+        //GET: Campanas/Inactive
+        public async Task<IActionResult> Inactive()
+        {
+            var asilosAncianosContext = _context.Campanas.Include(c => c.Establecimiento);
             return View(await asilosAncianosContext.ToListAsync());
         }
 
         // GET: Campanas/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details1(int? id)
         {
             if (id == null || _context.Campanas == null)
             {
@@ -35,7 +108,44 @@ namespace Asilo.Controllers
             }
 
             var campana = await _context.Campanas
-                .Include(c => c.Asilo)
+                .Include(c => c.Establecimiento)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (campana == null)
+            {
+                return NotFound();
+            }
+
+            return View(campana);
+        }
+        //GET: Campanas/Details/5 (Inactive)
+        public async Task<IActionResult> DetailsInactive(int? id)
+        {
+            if (id == null || _context.Campanas == null)
+            {
+                return NotFound();
+            }
+            var campana = await _context.Campanas
+                .Include(c => c.Establecimiento)
+                .Include(c => c.Donacions)
+                .ThenInclude(d => d.Benefactor)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (campana == null)
+            {
+                return NotFound();
+            }
+            return View(campana);
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Campanas == null)
+            {
+                return NotFound();
+            }
+            // Obtener el libro y sus imágenes
+            var campana = await _context.Campanas
+                .Include(c => c.Imagens)
+                .Include(c => c.Establecimiento)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (campana == null)
             {
@@ -48,26 +158,77 @@ namespace Asilo.Controllers
         // GET: Campanas/Create
         public IActionResult Create()
         {
-            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id");
+            ViewData["EstablecimientoId"] = new SelectList(_context.Establecimientos, "Id", "Id");
             return View();
         }
 
-        // POST: Campanas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AsiloId,Nombre,Requerimiento,FechaInicio,FechaCierre,TipoCampaña,Estado,FechaRegistro,FechaModificacion")] Campana campana)
+        public async Task<IActionResult> Create(Campana campana, List<string> ImagePreviews)
         {
-            if (ModelState.IsValid)
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            try
             {
-                _context.Add(campana);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var campanaa = new Campana();
+                campanaa = new Campana
+                {
+                    Nombre = campana.Nombre,
+                    Requerimiento = campana.Requerimiento,
+                    FechaInicio = campana.FechaInicio,
+                    FechaCierre = campana.FechaCierre,
+                    TipoCampaña = campana.TipoCampaña,
+                    EstablecimientoId = campana.EstablecimientoId
+                };
+
+                _context.Campanas.Add(campanaa);
+                _context.SaveChanges();
+
+
+                // Procesar las imágenes en la vista previa
+                foreach (var imagePreview in ImagePreviews)
+                {
+                    // Convertir la imagen de base64 a un array de bytes
+                    var base64Data = imagePreview.Substring(imagePreview.IndexOf(',') + 1);
+                    var imageData = Convert.FromBase64String(base64Data);
+
+                    //Agregar la imagen al libro
+                    var campanaImage = new Imagen
+                    {
+                        Imagen1 = imageData,
+                        CampanaId = campanaa.Id
+                    };
+                    _context.Imagens.Add(campanaImage);
+                }
+                _context.SaveChanges();
+                
+                
+                CampanaMongo campaMo = new CampanaMongo() {
+                    IdAux = campanaa.Id,
+                    usuarios = int.Parse(userId),
+                    nombre = campanaa.Nombre,
+                    requerimientos = campanaa.Requerimiento,
+                    imágenes = ImagePreviews,
+                    fechaInicio = campanaa.FechaInicio,
+                    fechaCierra = campanaa.FechaCierre,
+                    estado = 1,
+                    fechaRegistro = DateTime.Now.Date,
+                    fechaActualizada = null,
+
+                };
+                var database = _mongoClient.GetDatabase("AsilosAncianos");
+                var collection = database.GetCollection<CampanaMongo>("campana");
+                collection.InsertOne(campaMo);
+
+      
+                return RedirectToAction("Index", "Campanas");
             }
-            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.EstablecimientoID);
-            return View(campana);
+            catch (Exception ex)
+            {
+                return View("ERROR" + ex);
+            }
         }
+
 
         // GET: Campanas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -76,63 +237,112 @@ namespace Asilo.Controllers
             {
                 return NotFound();
             }
-
-            var campana = await _context.Campanas.FindAsync(id);
+            Imagen ima = new Imagen();
+            var campana = _context.Campanas
+                .Include(c => c.Imagens)
+                .FirstOrDefault(c => c.Id == id);
+            DateTime fechaActual = DateTime.Now;
+            campana.FechaModificacion = fechaActual;
             if (campana == null)
             {
                 return NotFound();
             }
-            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.EstablecimientoID);
+            ViewData["IdImagen"] = new SelectList(_context.Imagens, "Id", "Imagen1", campana.Imagens);
+            ViewData["EstablecimientoId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.EstablecimientoId);
             return View(campana);
         }
 
-        // POST: Campanas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AsiloId,Nombre,Requerimiento,FechaInicio,FechaCierre,TipoCampaña,Estado,FechaRegistro,FechaModificacion")] Campana campana)
+        public async Task<IActionResult> Editar(int id, Campana campana, List<string> ImagePreviews)
         {
-            if (id != campana.Id)
+            var campanaEditado = _context.Campanas.Find(id);
+            try
             {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
-            {
-                try
+                foreach (var imagePreview in ImagePreviews)
                 {
-                    _context.Update(campana);
-                    await _context.SaveChangesAsync();
+                    // Convertir la imagen de base64 a un array de bytes
+                    var base64Data = imagePreview.Substring(imagePreview.IndexOf(',') + 1);
+                    var imageData = Convert.FromBase64String(base64Data);
+
+
+
+                    // Agregar la imagen al libro
+                    var campanaImage = new Imagen
+                    {
+                        Imagen1 = imageData,
+                        CampanaId = campana.Id
+                    };
+                    _context.Imagens.Add(campanaImage);
                 }
-                catch (DbUpdateConcurrencyException)
+
+                campanaEditado.Nombre = campana.Nombre;
+                campanaEditado.Requerimiento = campana.Requerimiento;
+                campanaEditado.TipoCampaña = campana.TipoCampaña;
+                campanaEditado.FechaInicio = campana.FechaInicio;
+                campanaEditado.FechaCierre = campana.FechaCierre;
+                campanaEditado.EstablecimientoId = campana.EstablecimientoId;
+
+                campanaEditado.FechaModificacion = DateTime.Now;
+
+                _context.Update(campanaEditado);
+                await _context.SaveChangesAsync();
+                var filter = Builders<Campana>.Filter.Eq(r => r.Id, id);
+                var update = Builders<Campana>.Update
+                    .Set(r => r.Nombre, campana.Nombre)
+                    .Set(r => r.Requerimiento, campana.Requerimiento)
+                    .Set(r => r.Imagens, campana.Imagens)
+                    .Set(r => r.TipoCampaña, campana.TipoCampaña)
+                    .Set(r => r.FechaInicio, campana.FechaInicio)
+                    .Set(r => r.FechaCierre, campana.FechaCierre);
+
+                var updateResult = await _mongoCollection.UpdateOneAsync(filter, update);
+
+                if (updateResult.ModifiedCount == 0)
                 {
-                    if (!CampanaExists(campana.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    // Manejar el caso cuando el documento no existe en MongoDB o no se modificó correctamente
                 }
-                return RedirectToAction(nameof(Index));
+
+
+                return RedirectToAction("Index", "Campanas");
             }
-            ViewData["AsiloId"] = new SelectList(_context.Establecimientos, "Id", "Id", campana.EstablecimientoID);
-            return View(campana);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CampanaExists(campana.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
-        // GET: Campanas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public ActionResult GetImage(int id)
         {
-            if (id == null || _context.Campanas == null)
+            var image = _context.Imagens.Find(id);
+            if (image == null)
             {
                 return NotFound();
             }
 
-            var campana = await _context.Campanas
-                .Include(c => c.Asilo)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            return File(image.Imagen1, "image/jpeg");
+        }
+
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+
+
+            var campana = _context.Campanas
+                .Include(c => c.Imagens)
+                //.Include(c => c.Establecimiento)
+                .FirstOrDefault(c => c.Id == id);
             if (campana == null)
             {
                 return NotFound();
@@ -142,27 +352,43 @@ namespace Asilo.Controllers
         }
 
         // POST: Campanas/Delete/5
+        //[HttpPost, ActionName("Delete")]
+
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Campanas == null)
+            var campana = await _context.Campanas
+                .Include(c => c.Imagens)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (campana == null)
             {
-                return Problem("Entity set 'AsilosAncianosContext.Campanas'  is null.");
+                return NotFound();
             }
-            var campana = await _context.Campanas.FindAsync(id);
-            if (campana != null)
+
+
+            if (campana.Imagens != null && campana.Imagens.Count > 0)
             {
-                _context.Campanas.Remove(campana);
+                _context.Imagens.RemoveRange(campana.Imagens);
             }
-            
+            _context.Campanas.Remove(campana);
+
             await _context.SaveChangesAsync();
+
+            // Eliminar documento de MongoDB
+            var filter = Builders<Campana>.Filter.Eq(c => c.Id, id);
+            await _mongoCollection.DeleteOneAsync(filter);
+
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool CampanaExists(int id)
         {
-          return (_context.Campanas?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Campanas?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
+

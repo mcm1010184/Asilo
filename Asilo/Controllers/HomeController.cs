@@ -1,6 +1,7 @@
 ﻿using Asilo.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Asilo.Controllers
 {
@@ -15,6 +16,8 @@ namespace Asilo.Controllers
 
         public IActionResult Index()
         {
+            string userId = User.FindFirst(ClaimTypes.Name)?.Value;
+            ViewData["Usuario"] = userId;
             return View();
         }
 

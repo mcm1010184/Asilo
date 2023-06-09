@@ -12,10 +12,9 @@ public partial class Benefactor
     public string Apellidos { get; set; } = null!;
 
     public string Carnet { get; set; } = null!;
+    public double Latitud { get; set; }
 
-    public byte[] Latitud { get; set; } = null!;
-
-    public byte[] Longitud { get; set; } = null!;
+    public double Longitud { get; set; }
 
     public string Dirreccion { get; set; } = null!;
 

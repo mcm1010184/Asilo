@@ -1,0 +1,61 @@
+﻿@model Asilo.Models.TRecolectorUser
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Crear un nuevo </h1>
+
+<h4>recolector</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nonbre" class="control-label"></label>
+                <input asp-for="Nonbre" class="form-control" />
+                <span asp-validation-for="Nonbre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SegundoApellido" class="control-label"></label>
+                <input asp-for="SegundoApellido" class="form-control" />
+                <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ci" class="control-label"></label>
+                <input asp-for="Ci" class="form-control" />
+                <span asp-validation-for="Ci" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Celular" class="control-label"></label>
+                <input asp-for="Celular" class="form-control" />
+                <span asp-validation-for="Celular" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Usuario1" class="control-label"></label>
+                <input asp-for="Usuario1" class="form-control" />
+                <span asp-validation-for="Usuario1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Recolectors" class="btn btn-primary">Regresar a la lista</a>
+</div>
+

@@ -22,12 +22,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TEstablecimientoUsers" asp-action="Index">Establecimientos</a>
-                        </li>
+                     
                     </ul>
                 </div>
                 <li class="nav-item">
+                    <h3>@ViewData["Usuario"]</h3>
                     <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="LogOut">Cerrar Sesion</a>
                 </li>
             </div>

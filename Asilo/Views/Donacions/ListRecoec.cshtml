@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Asilo.Models.Donacion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de recojos de hoy</h1>
+
+<table class="table table-primary">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDonacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Benefactor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campana)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Benefactor.Dirreccion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoDonacion)
+                </td>
+                <td>
+                    @if (item.TipoBenefactor == 1)
+                    {
+                        @Html.DisplayFor(modelItem => item.Benefactor.Nombres)
+                        @Html.DisplayFor(modelItem => item.Benefactor.Apellidos)
+                    }
+                    else
+                    {
+                        <text>Anonimo</text>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Campana.Nombre)
+                </td>
+            
+                <td>
+                    @Html.DisplayFor(modelItem => item.Benefactor.Dirreccion)
+                </td>
+                <td>
+                    <a asp-action="MandarCorreo" asp-route-id="@item.Id">Vamos</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -7,22 +7,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asilo.Data;
 using Asilo.Models;
+using MongoDB.Driver;
 
 namespace Asilo.Controllers
 {
     public class RecolectorsController : Controller
     {
-        private readonly AsilosAncianosContext _context;
 
-        public RecolectorsController(AsilosAncianosContext context)
+        private readonly AsilosAncianosContext _context;
+        private readonly IMongoClient _mongoClient;
+        private readonly IMongoCollection<UsuarioRecolector> _mongoCollection;
+
+        public RecolectorsController(AsilosAncianosContext context, IMongoClient mongoClient)
         {
             _context = context;
+            _mongoClient = mongoClient;
+            _mongoCollection = _mongoClient.GetDatabase("AsilosAncianos").GetCollection<UsuarioRecolector>("usuarios");
         }
 
         // GET: Recolectors
         public async Task<IActionResult> Index()
         {
-            var asilosAncianosContext = _context.Recolectors.Include(r => r.IdNavigation);
+            var users = _context.Recolectors.Include(x => x.IdNavigation).Where(x => x.IdNavigation.Estado == 1);
+            return View(await users.ToListAsync());
+        }
+        public async Task<IActionResult> Index1()
+        {
+            var asilosAncianosContext = _context.Recolectors;
             return View(await asilosAncianosContext.ToListAsync());
         }
 
@@ -104,6 +115,21 @@ namespace Asilo.Controllers
                 {
                     _context.Update(recolector);
                     await _context.SaveChangesAsync();
+
+                    var filter = Builders<UsuarioRecolector>.Filter.Eq(r => r.IdAux, id);
+                    var update = Builders<UsuarioRecolector>.Update
+                        .Set(r => r.nonbre, recolector.Nonbre)
+                        .Set(r => r.apellido, recolector.Apellido)
+                        .Set(r => r.segundoApellido, recolector.SegundoApellido)
+                        .Set(r => r.ci, recolector.Ci)
+                        .Set(r => r.celular, recolector.Celular);
+
+                    var updateResult = await _mongoCollection.UpdateOneAsync(filter, update);
+
+                    if (updateResult.ModifiedCount == 0)
+                    {
+                        // Manejar el caso cuando el documento no existe en MongoDB o no se modificó correctamente
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,6 +144,7 @@ namespace Asilo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["Id"] = new SelectList(_context.Usuarios, "Id", "Id", recolector.Id);
             return View(recolector);
         }
@@ -146,18 +173,32 @@ namespace Asilo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Recolectors == null)
+            var tPersonPasient = await _context.Usuarios
+                  .FirstOrDefaultAsync(m => m.Id == id);
+            try
             {
-                return Problem("Entity set 'AsilosAncianosContext.Recolectors'  is null.");
-            }
-            var recolector = await _context.Recolectors.FindAsync(id);
-            if (recolector != null)
-            {
-                _context.Recolectors.Remove(recolector);
-            }
+                tPersonPasient.Estado = 0;
+                _context.Update(tPersonPasient);
+                await _context.SaveChangesAsync();
+
+                var filter = Builders<UsuarioRecolector>.Filter.Eq(r => r.IdAux, id);
+                var update = Builders<UsuarioRecolector>.Update
+                    .Set(r => r.estado, 0);
             
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+                var updateResult = await _mongoCollection.UpdateOneAsync(filter, update);
+
+                if (updateResult.ModifiedCount == 0)
+                {
+                    // Manejar el caso cuando el documento no existe en MongoDB o no se modificó correctamente
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return RedirectToAction("Index");
         }
 
         private bool RecolectorExists(int id)

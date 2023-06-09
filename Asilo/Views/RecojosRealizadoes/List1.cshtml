@@ -1,0 +1,47 @@
+﻿@model Asilo.Models.Recolector
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+ViewData["Title"] = "List";
+}
+@*
+    volver atras
+*@
+
+<a  asp-area="" asp-controller="Recolectors" asp-action="Index1">volver atras</a>
+
+<h1>detalle</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>benefactor</th>
+            <th>direcion</th>
+            <th>celular</th>
+            <th>detalle</th>
+        </tr>
+    </thead>
+<tbody>
+        <tr>
+            @foreach (var item in Model.RecojosRealizados)
+            {
+                @if(item.Id == Model.Id)
+                {
+                    @foreach (var item2 in Model.Donacions)
+                    {
+                        @if (item2.RecolectorId== Model.Id)
+                        {
+                           <th>@item2.Benefactor.Nombres @item2.Benefactor.Apellidos</th>
+                           <th>@item2.Benefactor.Dirreccion</th>
+                           <th>@item2.Benefactor.Celular</th>
+                           <th>
+                           </th>
+
+                        }
+                    }
+                }
+               
+            }
+        </tr>
+</table>

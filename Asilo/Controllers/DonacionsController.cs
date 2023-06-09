@@ -7,6 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asilo.Data;
 using Asilo.Models;
+using System.Security.Claims;
+using MongoDB.Driver;
+using System.Net;
+using System.Net.Mail;
+using Microsoft.SqlServer.Server;
+using System.Collections;
+
 
 namespace Asilo.Controllers
 {
@@ -22,14 +29,42 @@ namespace Asilo.Controllers
         // GET: Donacions
         public async Task<IActionResult> Index()
         {
-            var asilosAncianosContext = _context.Donacions.Include(d => d.Benefactor).Include(d => d.Campana).Include(d => d.Recolector);
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var asilosAncianosContext = _context.Donacions
+                .Include(d => d.Benefactor)
+                .Include(d => d.Campana)
+                .Include(d => d.Recolector)
+                .Where(x => x.Campana.EstablecimientoId == int.Parse(userId))
+                .OrderByDescending(d => d.Fecha); // Ordenar por la fecha en forma descendente
+
             return View(await asilosAncianosContext.ToListAsync());
+        }
+        public async Task<IActionResult> ListRecoec()
+        {
+            var asilosAncianosContext = _context.Donacions.Include(d => d.Benefactor).Include(d => d.Campana)
+           .Include(d => d.Recolector).Where(x => x.Recibida == false);
+            return View(await asilosAncianosContext.ToListAsync());
+
+        }
+        public async Task<IActionResult> ReporteDonaciones(DateTime fechaInicio, DateTime fechaFin)
+        {
+            var donaciones = await _context.Donacions
+             .Where(d => d.Recibida == true && d.Fecha >= fechaInicio && d.Fecha <= fechaFin)
+             .OrderBy(d => d.Fecha)
+             .Include(d => d.Benefactor)
+             .ToListAsync();
+
+            var model = new Tuple<DateTime, DateTime, List<Donacion>>(fechaInicio, fechaFin, donaciones);
+
+            return View(model); ;
         }
         public async Task<IActionResult> List()
         {
             var asilosAncianosContext = _context.Donacions.Include(d => d.Benefactor).Include(d => d.Campana);
             return View(await asilosAncianosContext.ToListAsync());
         }
+
 
         // GET: Donacions/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -56,9 +91,9 @@ namespace Asilo.Controllers
         // GET: Donacions/Create
         public IActionResult Create()
         {
-            ViewData["BenefactorId"] = new SelectList(_context.Benefactors, "Id", "Id");
-            ViewData["CampanaId"] = new SelectList(_context.Campanas, "Id", "Id");
-            ViewData["RecolectorId"] = new SelectList(_context.Recolectors, "Id", "Id");
+            ViewData["BenefactorId"] = new SelectList(_context.Benefactors, "Id", "Nombres");
+            ViewData["CampanaId"] = new SelectList(_context.Campanas, "Id", "Nombre");
+            ViewData["RecolectorId"] = new SelectList(_context.Recolectors, "Id", "Nonbre");
             return View();
         }
 
@@ -82,6 +117,70 @@ namespace Asilo.Controllers
         }
 
         // GET: Donacions/Edit/5
+
+
+       
+            public async Task<IActionResult> MandarCorreo(int? id)
+        {
+            try
+            {
+                // Configurar los datos de autenticación de Gmail
+                var smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential("brayancm603@gmail.com", "uhdubprsoycffzwg");
+                smtpClient.EnableSsl = true;
+
+                // Crear el mensaje de correo
+                var message = new MailMessage();
+                message.From = new MailAddress("brayancm603@gmail.com");
+                message.To.Add(new MailAddress("brayancm603@gmail.com"));
+                message.Subject = "Recolector enviado";
+                message.Body = "Mandamos a un recolector de confianza a tu dirección para el recojo de la donación";
+
+                // Enviar el correo electrónico
+                await smtpClient.SendMailAsync(message);
+                string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var esta = _context.Establecimientos
+                  .Where(x => x.Campanas.FirstOrDefault() != null && x.Campanas.First().Donacions.FirstOrDefault() != null && x.Id == x.Campanas.First().Donacions.First().RecolectorId)
+                  .FirstOrDefault();
+                int result = esta != null ? esta.Id : 2;
+
+                int recolectorId;
+                if (int.TryParse(userId, out recolectorId))
+                {
+                    RecojosRealizado r = new RecojosRealizado()
+                    {
+                        EstablecimientoId = result,
+                        RecolectorId = recolectorId,
+                        Cantidad = 2,
+                        Fecha = DateTime.Now,
+                    };
+                    _context.RecojosRealizados.Add(r);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    // Manejar el caso en el que userId no pueda convertirse a un entero válido
+                    // Puedes lanzar una excepción, mostrar un mensaje de error, etc.
+                }
+                var idDona = await _context.Donacions.FindAsync(id);
+                if (idDona != null && id == idDona.Id)
+                {
+                    idDona.Recibida = true;
+                    _context.Donacions.Update(idDona);
+                    await _context.SaveChangesAsync();
+                }
+
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                // Manejar cualquier excepción
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Donacions == null)

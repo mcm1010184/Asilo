@@ -7,22 +7,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Asilo.Data;
 using Asilo.Models;
+using ZstdSharp.Unsafe;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Asilo.Controllers
 {
     public class TEstablecimientoUsersController : Controller
     {
         private readonly AsilosAncianosContext _context;
+        private readonly IMongoClient _mongoClient;
+        private readonly IMongoCollection<UsuarioEstablecimiento> _mongoCollection;
 
-        public TEstablecimientoUsersController(AsilosAncianosContext context)
+        public TEstablecimientoUsersController(AsilosAncianosContext context, IMongoClient mongoClient)
         {
             _context = context;
+            _mongoClient = mongoClient;
+            _mongoCollection = _mongoClient.GetDatabase("AsilosAncianos").GetCollection<UsuarioEstablecimiento>("usuarios");
         }
 
         // GET: TEstablecimientoUsers
         public async Task<IActionResult> Index()
         {
-            var users = _context.Establecimientos.Include(x => x.Usuario).Where(x => x.Usuario.Estado == 1);
+            var users = _context.Establecimientos.Include(x => x.IdNavigation).Where(x => x.IdNavigation.Estado == 1);
             return View(await users.ToListAsync());
         }
 
@@ -57,17 +64,13 @@ namespace Asilo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nombre,Nit,RepresentantePrincipal,Email,Telefono,Celular,Direccion,Latitud,Longitud,TipoEstablecimiento,Id,Usuario1,Password,Role")] TEstablecimientoUser tEstablecimientoUser)
         {
-            if (ModelState.IsValid)
-            {
-
-            }
-            using (var context = _context.Database.BeginTransaction())
+            using (var transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
+                    // Insertar en SQL Server
                     Usuario u = new()
                     {
-                       
                         Usuario1 = tEstablecimientoUser.Usuario1,
                         Password = tEstablecimientoUser.Password,
                         Role = "Establecimiento",
@@ -91,16 +94,43 @@ namespace Asilo.Controllers
                     };
                     _context.Establecimientos.Add(e);
                     await _context.SaveChangesAsync();
-                    context.Commit();
+
+                    // Insertar en MongoDB
+                    UsuarioEstablecimiento estaM = new UsuarioEstablecimiento()
+                    {
+                        IdAux = u.Id,
+                        nombre = tEstablecimientoUser.Nombre,
+                        nit = tEstablecimientoUser.Nit,
+                        representantePrincipal = tEstablecimientoUser.RepresentantePrincipal,
+                        correoElectrónico = tEstablecimientoUser.Email,
+                        telefono = tEstablecimientoUser.Telefono,
+                        celular = tEstablecimientoUser.Celular,
+                        direccion = tEstablecimientoUser.Direccion,
+                        latitud = tEstablecimientoUser.Latitud,
+                        longitud = tEstablecimientoUser.Longitud,
+                        usuario = tEstablecimientoUser.Usuario1,
+                        contraseña = tEstablecimientoUser.Password,
+                        rol = "ESTABLECIMIENTO",
+                        estado = 1,
+                        fechaRegistro = DateTime.Now,
+                        fechaActualizada = null
+                    };
+
+                    var database = _mongoClient.GetDatabase("AsilosAncianos");
+                    var collection = database.GetCollection<UsuarioEstablecimiento>("usuarios");
+                    collection.InsertOne(estaM);
+
+                    transaction.Commit();
+                    return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
-                   
-                    context.Rollback();
+                    transaction.Rollback();
                 }
             }
+
             return RedirectToAction("Index", "Home");
-          
+
         }
 
         // GET: TEstablecimientoUsers/Edit/5
@@ -137,6 +167,24 @@ namespace Asilo.Controllers
                 {
                     _context.Update(tEstablecimientoUser);
                     await _context.SaveChangesAsync();
+
+                    var filter = Builders<UsuarioEstablecimiento>.Filter.Eq(e => e.IdAux, id);
+                    var update = Builders<UsuarioEstablecimiento>.Update
+                        .Set(e => e.nombre, tEstablecimientoUser.Nombre)
+                        .Set(e => e.nit, tEstablecimientoUser.Nit)
+                        .Set(e => e.representantePrincipal, tEstablecimientoUser.RepresentantePrincipal)
+                        .Set(e => e.telefono, tEstablecimientoUser.Telefono)
+                        .Set(e => e.celular, tEstablecimientoUser.Celular)
+                        .Set(e => e.direccion, tEstablecimientoUser.Direccion)
+                        .Set(e => e.latitud, tEstablecimientoUser.Latitud)
+                        .Set(e => e.longitud, tEstablecimientoUser.Longitud);
+
+                    var updateResult = await _mongoCollection.UpdateOneAsync(filter, update);
+
+                    if (updateResult.ModifiedCount == 0)
+                    {
+                        // Manejar el caso cuando el documento no existe en MongoDB o no se modificó correctamente
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -151,6 +199,7 @@ namespace Asilo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             return View(tEstablecimientoUser);
         }
 
@@ -172,23 +221,35 @@ namespace Asilo.Controllers
             return View(tEstablecimientoUser);
         }
 
-        // POST: TEstablecimientoUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TEstablecimientoUser == null)
+            var tPersonPasient = await _context.Usuarios
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            try
             {
-                return Problem("Entity set 'AsilosAncianosContext.TEstablecimientoUser'  is null.");
+                tPersonPasient.Estado = 0;
+                _context.Update(tPersonPasient);
+                await _context.SaveChangesAsync();
+
+                var filter = Builders<UsuarioEstablecimiento>.Filter.Eq(r => r.IdAux, id);
+                var update = Builders<UsuarioEstablecimiento>.Update.Set(r => r.estado, 0);
+
+                var updateResult = await _mongoCollection.UpdateOneAsync(filter, update);
+
+                if (updateResult.ModifiedCount == 0)
+                {
+                    return NotFound();
+                }
             }
-            var tEstablecimientoUser = await _context.TEstablecimientoUser.FindAsync(id);
-            if (tEstablecimientoUser != null)
+            catch (Exception)
             {
-                _context.TEstablecimientoUser.Remove(tEstablecimientoUser);
+                // Manejar cualquier excepción
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction("Index", "TEstablecimientoUsers");
         }
 
         private bool TEstablecimientoUserExists(int id)

@@ -1,0 +1,51 @@
+﻿@model Tuple<DateTime, DateTime, List<Donacion>>
+
+@{
+    ViewData["Title"] = "Reporte de Donaciones Recibidas";
+}
+
+<h1>Reporte de Donaciones Recibidas</h1>
+
+<form method="get" >
+    <div class="form-group">
+        <label for="fechaInicio" class="control-label">Fecha de inicio:</label>
+        <input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="@Model.Item1.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="form-group">
+        <label for="fechaFin" class="control-label">Fecha de fin:</label>
+        <input class="form-control" type="date" id="fechaFin" name="fechaFin" value="@Model.Item2.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Generar Reporte</button>
+    </div>
+</form>
+
+@if (Model.Item3.Count > 0)
+{
+    <table class="table table-success">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Benefactor</th>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var donacion in Model.Item3)
+            {
+                <tr>
+                    <td>@donacion.Fecha</td>
+                    <td>@donacion.Benefactor.Nombres @donacion.Benefactor.Apellidos</td>
+                    <td>@donacion.Cantidad</td>
+                    <td>@donacion.Descripcion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron donaciones en el rango de fechas seleccionado.</p>
+}
+

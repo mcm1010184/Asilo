@@ -3,10 +3,15 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+<h1>Modifcar Establecimiento</h1>
 
-<h1>Edit</h1>
-
-<h4>TEstablecimientoUser</h4>
+<h4>Modificar</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -68,8 +73,38 @@
                 <input asp-for="IdUser" class="form-control" />
                 <span asp-validation-for="IdUser" class="text-danger"></span>
             </div>
+            <div id="map">
+            </div>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSce5nXAFJC6gZr-dBEWz8Te91I20nSiE&callback=initMap"></script>
+
+            <script>
+                function initMap() {
+                    // Establece las coordenadas iniciales del mapa
+                    var myLatLng = { lat: -25.363, lng: 131.044 };
+
+                    // Crea un nuevo mapa y establece su centro y nivel de zoom
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 4,
+                        center: myLatLng
+                    });
+
+                    // Crea un nuevo marcador y agrégalo al mapa
+                    var marker = new google.maps.Marker({
+                        position: myLatLng,
+                        map: map,
+                        draggable: true,
+                        title: '¡Arrástrame!'
+                    });
+
+                    // Agrega un escuchador de eventos al marcador para actualizar los campos de latitud y longitud cuando se arrastre
+                    marker.addListener('dragend', function () {
+                        document.getElementById('Latitud').value = marker.getPosition().lat();
+                        document.getElementById('Longitud').value = marker.getPosition().lng();
+                    });
+                }
+            </script>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Modificar" class="btn btn-primary" />
             </div>
         </form>
     </div>

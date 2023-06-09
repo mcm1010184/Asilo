@@ -1,0 +1,72 @@
+﻿@model List<Campana>
+
+<h1>Campañas Cerradas</h1>
+
+<table class="table table-success">
+    <thead>
+        <tr>
+            <th>Campaña</th>
+            <th>Benefactores</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var campana in Model)
+        {
+            <tr>
+                <td>@campana.Nombre</td>
+                <td>
+                    @{
+                        var benefactores = ViewData["BenefactoresPorCampana"] as Dictionary<int, List<string>>;
+                        var benefactoresCampana = benefactores.ContainsKey(campana.Id) ? benefactores[campana.Id] : new List<string>();
+                    }
+
+                    @if (benefactoresCampana.Count > 0)
+                    {
+                        <ul>
+                            @foreach (var benefactor in benefactoresCampana)
+                            {
+                                <li>@benefactor</li>
+                            }
+                        </ul>
+
+                    <td>
+                        <ul>
+                                @foreach (var benefactor in benefactoresCampana)
+                                {
+                                <li>
+                                        @{
+                                            var donacionesBenefactor = campana.Donacions
+                                            .Where(d => d.Benefactor != null && d.Benefactor.Nombres == benefactor)
+                                            .ToList();
+                                            if (donacionesBenefactor.Any())
+                                            {
+                                                var recibido = donacionesBenefactor.All(d => d.Recibida.HasValue && d.Recibida.Value);
+                                                if (recibido)
+                                                {
+                                                    <text>Recibido</text>
+                                                }
+                                                else
+                                                {
+                                                    <text>En espera</text>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <text>En espera</text>
+                                            }
+                                        }
+                                </li>
+                                }
+                        </ul>
+                    </td>
+                    }
+                    else
+                    {
+                    <p>No hay benefactores registrados para esta campaña.</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

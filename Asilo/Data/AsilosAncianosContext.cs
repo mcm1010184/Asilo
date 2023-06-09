@@ -26,7 +26,10 @@ public partial class AsilosAncianosContext : DbContext
     public  DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-T59A902;Initial Catalog=AsilosAncianos;User ID=sa;Password=Solamente603;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+    {
+        //=>optionsBuilder.UseSqlServer("Data Source=DESKTOP-T59A902;Initial Catalog=AsilosAncianos;User ID=sa;Password=Solamente603;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -70,7 +73,6 @@ public partial class AsilosAncianosContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Benefactor_Usuario");
         });
-
         modelBuilder.Entity<Campana>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Campana__3213E83FF1A179E0");
@@ -78,7 +80,7 @@ public partial class AsilosAncianosContext : DbContext
             entity.ToTable("Campana");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.EstablecimientoID).HasColumnName("establecimientoID");
+            entity.Property(e => e.EstablecimientoId).HasColumnName("establecimientoID");
             entity.Property(e => e.Estado)
                 .HasDefaultValueSql("((1))")
                 .HasColumnName("estado");
@@ -107,28 +109,29 @@ public partial class AsilosAncianosContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("tipoCampaña");
 
-            entity.HasOne(d => d.Asilo).WithMany(p => p.Campanas)
-                .HasForeignKey(d => d.EstablecimientoID)
+            entity.HasOne(d => d.Establecimiento).WithMany(p => p.Campanas)
+                .HasForeignKey(d => d.EstablecimientoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Campana__asilo_i__267ABA7A");
+                .HasConstraintName("FK_Campana_Establecimiento");
         });
+
 
         modelBuilder.Entity<Donacion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Donacion__3213E83FE40E785E");
-
             entity.ToTable("Donacion");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.BenefactorId).HasColumnName("benefactorId");
             entity.Property(e => e.CampanaId).HasColumnName("campanaId");
-            entity.Property(e => e.Cantidad)
-               .HasDefaultValueSql("((1))")
-               .HasColumnName("cantidad");
+            entity.Property(e => e.Cantidad).HasColumnName("cantidad");
             entity.Property(e => e.Descripcion)
-               .HasMaxLength(255)
-               .IsUnicode(false)
-               .HasColumnName("descripcion");
+                .HasMaxLength(250)
+                .IsUnicode(false)
+                .HasColumnName("descripcion");
+            entity.Property(e => e.Fecha)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("date")
+                .HasColumnName("fecha");
             entity.Property(e => e.Recibida)
                 .HasDefaultValueSql("((0))")
                 .HasColumnName("recibida");
@@ -140,9 +143,7 @@ public partial class AsilosAncianosContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("tipoDonacion");
-            entity.Property(e => e.Fecha)
-                .HasColumnType("date")
-                .HasColumnName("fecha");
+
             entity.HasOne(d => d.Benefactor).WithMany(p => p.Donacions)
                 .HasForeignKey(d => d.BenefactorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -158,16 +159,15 @@ public partial class AsilosAncianosContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Donacion_Recolector");
         });
-
         modelBuilder.Entity<Establecimiento>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Asilo__3213E83FB5C8991C");
 
             entity.ToTable("Establecimiento");
 
-            entity.Property(e => e.Id).HasColumnName("id")
-            .ValueGeneratedNever();
-
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
             entity.Property(e => e.Celular).HasColumnName("celular");
             entity.Property(e => e.Direccion)
                 .HasMaxLength(70)
@@ -196,11 +196,16 @@ public partial class AsilosAncianosContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("tipoEstablecimiento");
+
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Establecimiento)
+                .HasForeignKey<Establecimiento>(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Establecimiento_Usuario");
         });
 
         modelBuilder.Entity<Imagen>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Imagen__3213E83FC752657D");
+            entity.HasKey(e => e.Id).HasName("PK__Imagen__3213E83FBEC7BCDF");
 
             entity.ToTable("Imagen");
 
@@ -221,12 +226,12 @@ public partial class AsilosAncianosContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Cantidad).HasColumnName("cantidad");
             entity.Property(e => e.EstablecimientoId).HasColumnName("establecimientoId");
+            entity.Property(e => e.Estado)
+                .HasDefaultValueSql("((1))")
+                .HasColumnName("estado");
             entity.Property(e => e.Fecha)
                 .HasColumnType("date")
                 .HasColumnName("fecha");
-            entity.Property(e => e.Estado)
-               .HasDefaultValueSql("((1))")
-               .HasColumnName("estado");
             entity.Property(e => e.RecolectorId).HasColumnName("recolectorId");
 
             entity.HasOne(d => d.Establecimiento).WithMany(p => p.RecojosRealizados)
@@ -245,7 +250,7 @@ public partial class AsilosAncianosContext : DbContext
             entity.ToTable("Recolector");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.Apellido)
                 .HasMaxLength(50)
@@ -275,9 +280,7 @@ public partial class AsilosAncianosContext : DbContext
         {
             entity.ToTable("Usuario");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Estado)
                 .HasDefaultValueSql("((1))")
                 .HasColumnName("estado");
@@ -300,11 +303,6 @@ public partial class AsilosAncianosContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("usuario");
-
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Usuario)
-                .HasForeignKey<Usuario>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Usuario_Establecimiento");
         });
 
         OnModelCreatingPartial(modelBuilder);
@@ -313,5 +311,7 @@ public partial class AsilosAncianosContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
     public DbSet<TEstablecimientoUser> TEstablecimientoUser { get; set; }
+
+    public DbSet<Asilo.Models.TRecolectorUser>? TRecolectorUser { get; set; }
 
 }

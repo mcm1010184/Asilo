@@ -4,69 +4,142 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Campana</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Requerimiento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Requerimiento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaInicio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaInicio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaCierre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaCierre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoCampaña)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoCampaña)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaRegistro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaModificacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaModificacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EstablecimientoID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EstablecimientoID)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+@*<div class="properties-details-page content-area-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row justify-content-center align-items-center">
+                    @foreach (var image in Model.Imagens)
+                    {
+                        <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="data:image;base64,@Convert.ToBase64String(image.Imagen1)" alt="@image.Id" class="img-fluid" style="max-height: 200px; max-width: 200px;" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <div class="properties-details-section">
+
+                    <div class="property-details mb-40">
+                        <h3 class="heading-2">Detalle Campaña</h3>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6">
+                                <ul>
+                                    <li>
+                                        <strong>Nombre Campaña:</strong>@Html.DisplayFor(model => model.Nombre)
+                                    </li>
+                                    <li>
+                                        <strong>Requerimiento:</strong>@Html.DisplayFor(model => model.Requerimiento)
+                                    </li>
+                                    <li>
+                                        <strong>Tipo Beneficiario:</strong>@Html.DisplayFor(model => model.TipoCampaña)
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <ul>
+                                    <li>
+                                        <strong>Fecha Inicio::</strong>@Html.DisplayFor(model => model.FechaInicio)
+                                    </li>
+                                    <li>
+                                        <strong>Fecha Cierre:</strong>@Html.DisplayFor(model => model.FechaCierre)
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <button class="btn button-theme btn-search bs-2 btn-block">
+                        <a asp-action="Index">Volver</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+<!-- Properties details page end -->
+
+<style>
+    /* Estilos para la tabla */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    /* Estilos para las imágenes */
+    .campaign-image {
+        max-height: 200px;
+        max-width: 200px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+        .campaign-image:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+</style>
+
+<div class="container">
+    <h3 class="heading-2 align-content-center">Detalle Campaña</h3>
+    <h3 class="heading-2 align-content-center">Imágenes</h3>
+    <div class="row justify-content-center align-items-center">
+        @foreach (var image in Model.Imagens)
+        {
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="data:image;base64,@Convert.ToBase64String(image.Imagen1)" alt="@image.Id" class="img-fluid campaign-image" />
+                </div>
+            </div>
+        }
+    </div>
+    <table>
+        <tr>
+            <th>Nombre Campaña</th>
+            <td>@Html.DisplayFor(model => model.Nombre)</td>
+        </tr>
+        <tr>
+            <th>Requerimiento</th>
+            <td>@Html.DisplayFor(model => model.Requerimiento)</td>
+        </tr>
+        <tr>
+            <th>Tipo Beneficiario</th>
+            <td>@Html.DisplayFor(model => model.TipoCampaña)</td>
+        </tr>
+        <tr>
+            <th>Fecha Inicio</th>
+            <td>@Html.DisplayFor(model => model.FechaInicio)</td>
+        </tr>
+        <tr>
+            <th>Fecha Cierre</th>
+            <td>@Html.DisplayFor(model => model.FechaCierre)</td>
+        </tr>
+    </table>
+
+   
+
+    <button class="btn button-theme btn-search bs-2 btn-block">
+        <a asp-action="Index">Volver</a>
+    </button>
 </div>

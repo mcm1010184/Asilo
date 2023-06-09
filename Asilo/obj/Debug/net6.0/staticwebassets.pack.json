@@ -153,6 +153,10 @@
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
+      "Id": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\lib\\bootstrap\\dist\\css\\style.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\style.css"
+    },
+    {
       "Id": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },

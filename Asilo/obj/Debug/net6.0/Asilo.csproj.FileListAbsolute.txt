@@ -287,3 +287,16 @@ D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\runtimes\unix\lib\
 D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\AWSSDK.Core.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\AWSSDK.SecurityToken.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\DnsClient.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\MongoDB.Bson.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\MongoDB.Driver.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\MongoDB.Driver.Core.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\SharpCompress.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\Snappier.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\ZstdSharp.dll
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
+D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll

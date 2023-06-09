@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de todas donaciones</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -28,6 +28,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Recolector)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,7 +38,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                    @if (item.Recibida == false)
+                    @if (item.Recibida == true)
                     {
                         <text>Recibido</text>
                     }
@@ -49,22 +52,22 @@
                 @Html.DisplayFor(modelItem => item.TipoDonacion)
             </td>
             <td>
-                    @if (item.TipoBenefactor == 1)
-                    {
+                 
                         @Html.DisplayFor(modelItem => item.Benefactor.Nombres)
                         @Html.DisplayFor(modelItem => item.Benefactor.Apellidos)
-                    }
-                    else
-                    {
-                        <text>Anonimo</text>
-                    }
+                  
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Campana.Nombre)
             </td>
             <td>
+                
                 @Html.DisplayFor(modelItem => item.Recolector.Nonbre)
             </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Fecha.Date)
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

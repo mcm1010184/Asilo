@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "r+gbTpXGENIpAzhmg/rHjLT13k39xIWxCA5WWQSP1vo=",
+  "Hash": "AQ396JhW9qr3uhBgbV+x7MsvSfa51er47Ri1cZydEyw=",
   "Source": "Asilo",
   "BasePath": "_content/Asilo",
   "Mode": "Default",
@@ -661,6 +661,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Identity": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\lib\\bootstrap\\dist\\css\\style.css",
+      "SourceId": "Asilo",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\",
+      "BasePath": "_content/Asilo",
+      "RelativePath": "lib/bootstrap/dist/css/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\style.css"
     },
     {
       "Identity": "D:\\Univalle\\Quinto Semestre\\Reto\\Asilo\\Asilo\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",

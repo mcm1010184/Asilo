@@ -52,7 +52,7 @@ namespace Asilo.Controllers
                 var clainsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(clainsIdentity));
                 return RedirectToAction("Index", "Home");
-
+            
             }
             else
             {
