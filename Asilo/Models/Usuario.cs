@@ -41,7 +41,6 @@ public partial class Usuario
     public DateTime FechaRegistro { get; set; }
 
     public DateTime? FechaModificacion { get; set; }
-    public virtual Benefactor? Benefactor { get; set; }
 
     public virtual Establecimiento? Establecimiento { get; set; }
 

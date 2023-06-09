@@ -154,6 +154,7 @@ namespace Asilo.Controllers
                         RecolectorId = recolectorId,
                         Cantidad = 2,
                         Fecha = DateTime.Now,
+                        Estado = 0,
                     };
                     _context.RecojosRealizados.Add(r);
                     await _context.SaveChangesAsync();
@@ -193,9 +194,9 @@ namespace Asilo.Controllers
             {
                 return NotFound();
             }
-            ViewData["BenefactorId"] = new SelectList(_context.Benefactors, "Id", "Id", donacion.BenefactorId);
-            ViewData["CampanaId"] = new SelectList(_context.Campanas, "Id", "Id", donacion.CampanaId);
-            ViewData["RecolectorId"] = new SelectList(_context.Recolectors, "Id", "Id", donacion.RecolectorId);
+            ViewData["BenefactorId"] = new SelectList(_context.Benefactors, "Id", "Nombre", donacion.BenefactorId);
+            ViewData["CampanaId"] = new SelectList(_context.Campanas, "Id", "Nombre", donacion.CampanaId);
+            ViewData["RecolectorId"] = new SelectList(_context.Recolectors, "Id", "Nonbre", donacion.RecolectorId);
             return View(donacion);
         }
 
@@ -231,9 +232,9 @@ namespace Asilo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BenefactorId"] = new SelectList(_context.Benefactors, "Id", "Id", donacion.BenefactorId);
-            ViewData["CampanaId"] = new SelectList(_context.Campanas, "Id", "Id", donacion.CampanaId);
-            ViewData["RecolectorId"] = new SelectList(_context.Recolectors, "Id", "Id", donacion.RecolectorId);
+            ViewData["BenefactorId"] = new SelectList(_context.Benefactors, "Id", "Nombre", donacion.BenefactorId);
+            ViewData["CampanaId"] = new SelectList(_context.Campanas, "Id", "Nombre", donacion.CampanaId);
+            ViewData["RecolectorId"] = new SelectList(_context.Recolectors, "Id", "Nonbre", donacion.RecolectorId);
             return View(donacion);
         }
 

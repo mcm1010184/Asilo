@@ -22,7 +22,7 @@ namespace Asilo.Controllers
         // GET: Benefactors
         public async Task<IActionResult> Index()
         {
-            var asilosAncianosContext = _context.Benefactors.Include(b => b.IdNavigation);
+            var asilosAncianosContext = _context.Benefactors;
             return View(await asilosAncianosContext.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace Asilo.Controllers
             }
 
             var benefactor = await _context.Benefactors
-                .Include(b => b.IdNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (benefactor == null)
             {
@@ -57,7 +56,7 @@ namespace Asilo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombres,Apellidos,Carnet,Latitud,Longitud,Dirreccion,Email,Telefono,Celular")] Benefactor benefactor)
+        public async Task<IActionResult> Create([Bind("Id,Nombres,Apellidos,Carnet,Dirreccion,Email,Celular")] Benefactor benefactor)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +90,7 @@ namespace Asilo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombres,Apellidos,Carnet,Latitud,Longitud,Dirreccion,Email,Telefono,Celular")] Benefactor benefactor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombres,Apellidos,Carnet,Dirreccion,Email,Celular")] Benefactor benefactor)
         {
             if (id != benefactor.Id)
             {
@@ -131,7 +130,6 @@ namespace Asilo.Controllers
             }
 
             var benefactor = await _context.Benefactors
-                .Include(b => b.IdNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (benefactor == null)
             {

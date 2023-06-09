@@ -3,46 +3,27 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/style.css"/>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+</head>
 <h1>Lista de Establecimientos</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create" asp-controller="TEstablecimientoUsers">Create New</a>
+    <a class="btn btn-outline-info" asp-action="Create" asp-controller="TEstablecimientoUsers">Crear un nuevo</a>
 </p>
-<table class="table table-success">
+<table class="table custom-table table-responsive table-hover">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepresentantePrincipal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Celular)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Latitud)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Longitud)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoEstablecimiento)
-            </th>
-            <th></th>
+            <th scope="col">Razón social</th>
+            <th scope="col">Nit</th>
+            <th scope="col">Representante</th>
+            <th scope="col">Correo electronico</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Celular</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Tipo</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -80,10 +61,12 @@
                     @Html.DisplayFor(modelItem => item.TipoEstablecimiento)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Modificar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning fas fa-pencil-alt"></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger fas fa-trash-alt"></a>
                 </td>
+            
             </tr>
+           <tr class="spacer"><td colspan="100"></td></tr>
         }
     </tbody>
 </table>

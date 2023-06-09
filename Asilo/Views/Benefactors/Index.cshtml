@@ -22,26 +22,16 @@
                 @Html.DisplayNameFor(model => model.Carnet)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Latitud)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Longitud)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Dirreccion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.Celular)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdNavigation)
-            </th>
+    
             <th></th>
         </tr>
     </thead>
@@ -58,26 +48,16 @@
                 @Html.DisplayFor(modelItem => item.Carnet)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Latitud)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitud)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Dirreccion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
+        
             <td>
                 @Html.DisplayFor(modelItem => item.Celular)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNavigation.Id)
-            </td>
+           
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

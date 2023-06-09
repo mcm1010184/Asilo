@@ -14,7 +14,9 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.5",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.13",
-          "MongoDB.Driver": "2.19.2"
+          "MongoDB.Bson": "2.19.2",
+          "MongoDB.Driver": "2.19.2",
+          "MongoDB.Driver.Core": "2.19.2"
         },
         "runtime": {
           "Asilo.dll": {}

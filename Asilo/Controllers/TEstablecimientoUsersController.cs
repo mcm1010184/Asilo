@@ -23,7 +23,7 @@ namespace Asilo.Controllers
         {
             _context = context;
             _mongoClient = mongoClient;
-            _mongoCollection = _mongoClient.GetDatabase("AsilosAncianos").GetCollection<UsuarioEstablecimiento>("usuarios");
+            _mongoCollection = _mongoClient.GetDatabase("AsilosAncianos").GetCollection<UsuarioEstablecimiento>("users");
         }
 
         // GET: TEstablecimientoUsers
@@ -117,7 +117,7 @@ namespace Asilo.Controllers
                     };
 
                     var database = _mongoClient.GetDatabase("AsilosAncianos");
-                    var collection = database.GetCollection<UsuarioEstablecimiento>("usuarios");
+                    var collection = database.GetCollection<UsuarioEstablecimiento>("users");
                     collection.InsertOne(estaM);
 
                     transaction.Commit();

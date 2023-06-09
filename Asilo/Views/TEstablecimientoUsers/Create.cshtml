@@ -9,72 +9,73 @@
         width: 100%;
     }
 </style>
-<h1>Create</h1>
-
-<h4>Registrar Establecimiento</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card border-info text-center">
+    <div class="card-header bg-transparent border-info text-primary">
+        <h1>Crear nuevo</h1>
+        <h4>Establecimiento</h4>
+    </div>
+    <div class="card-body">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="Nombre" type="text" class="form-control" placeholder="Razón Social" />
+                <label>Razón social</label>
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Nit" class="control-label"></label>
-                <input asp-for="Nit" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="Nit" type="text" class="form-control" placeholder="NIT-0987890" />
+                <label>NIT</label>
                 <span asp-validation-for="Nit" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="RepresentantePrincipal" class="control-label"></label>
-                <input asp-for="RepresentantePrincipal" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="RepresentantePrincipal" type="text" class="form-control" placeholder="Nombres Apellidos" />
+                <label>Representante Principal</label>
                 <span asp-validation-for="RepresentantePrincipal" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="Email" type="email" class="form-control" placeholder="correo@endidad.com" />
+                <label>Correo electronico</label>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="Telefono" type="number" class="form-control" placeholder="4380987" />
+                <label>Telefono</label>
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Celular" class="control-label"></label>
-                <input asp-for="Celular" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="Celular" type="number" class="form-control" placeholder="76760983" />
+                <label>Celular</label>
                 <span asp-validation-for="Celular" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="Direccion" type="text" class="form-control" placeholder="Av. Calle" />
+                <label>Direccion de domicilio</label>
                 <span asp-validation-for="Direccion" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Latitud" class="control-label"></label>
-                <input asp-for="Latitud" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="Latitud" class="form-control" placeholder="-00,000000" />
+                <label>Latitud</label>
                 <span asp-validation-for="Latitud" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Longitud" class="control-label"></label>
-                <input asp-for="Longitud" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="Longitud" class="form-control" placeholder="-00,000000" />
+                <label>Longitud</label>
                 <span asp-validation-for="Longitud" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="TipoEstablecimiento" class="control-label"></label>
-                <input asp-for="TipoEstablecimiento" class="form-control" />
+            <div class="form-floating mb-3">
+                <input asp-for="TipoEstablecimiento" type="text" class="form-control" placeholder="Institución / Asilo" />
+                <label>Tipo Establecimiento</label>
                 <span asp-validation-for="TipoEstablecimiento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Usuario1" class="control-label"></label>
-                <input asp-for="Usuario1" class="form-control" required />
+            <div class="form-floating mb-3">
+                
+                <input asp-for="Usuario1" class="form-control" required placeholder="Nombre de usuario" />
+                <label>Usuario</label>
                 <span asp-validation-for="Usuario1" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" required type="password" />
+            <div class="form-floating mb-3">
+                <input asp-for="Password" class="form-control" required type="password" placeholder="Contraseña" />
+                <label>Contraseña</label>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div id="map">

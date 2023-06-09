@@ -60,18 +60,12 @@ public partial class AsilosAncianosContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("email");
-            entity.Property(e => e.Latitud).HasColumnName("latitud");
-            entity.Property(e => e.Longitud).HasColumnName("longitud");
+           
             entity.Property(e => e.Nombres)
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("nombres");
-            entity.Property(e => e.Telefono).HasColumnName("telefono");
-
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Benefactor)
-                .HasForeignKey<Benefactor>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Benefactor_Usuario");
+           
         });
         modelBuilder.Entity<Campana>(entity =>
         {

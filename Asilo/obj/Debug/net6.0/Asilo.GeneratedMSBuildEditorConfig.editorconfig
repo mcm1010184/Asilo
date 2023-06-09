@@ -9,281 +9,281 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Asilo
 build_property.RootNamespace = Asilo
-build_property.ProjectDir = D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo\
+build_property.ProjectDir = D:\Univalle\Carpeta_Qunto_Semestre\Reto\Asilo\Asilo\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Univalle\Quinto Semestre\Reto\Asilo\Asilo
+build_property.MSBuildProjectDirectory = D:\Univalle\Carpeta_Qunto_Semestre\Reto\Asilo\Asilo
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Benefactors/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Benefactors/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVuZWZhY3RvcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Benefactors/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Benefactors/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVuZWZhY3RvcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Benefactors/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Benefactors/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVuZWZhY3RvcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Benefactors/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Benefactors/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVuZWZhY3RvcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Benefactors/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Benefactors/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVuZWZhY3RvcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/Details1.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/Details1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcRGV0YWlsczEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/DetailsInactive.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/DetailsInactive.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcRGV0YWlsc0luYWN0aXZlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/Inactive.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/Inactive.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcSW5hY3RpdmUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/Index1.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/Index1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcSW5kZXgxLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Campanas/IndexCerradas.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Campanas/IndexCerradas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcGFuYXNcSW5kZXhDZXJyYWRhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Donacions/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Donacions/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYWNpb25zXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Donacions/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Donacions/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYWNpb25zXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Donacions/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Donacions/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYWNpb25zXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Donacions/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Donacions/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYWNpb25zXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Donacions/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Donacions/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYWNpb25zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Donacions/List.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Donacions/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYWNpb25zXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Donacions/ListRecoec.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Donacions/ListRecoec.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYWNpb25zXExpc3RSZWNvZWMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Donacions/ReporteDonaciones.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Donacions/ReporteDonaciones.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uYWNpb25zXFJlcG9ydGVEb25hY2lvbmVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWJsZWNpbWllbnRvZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWJsZWNpbWllbnRvZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWJsZWNpbWllbnRvZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWJsZWNpbWllbnRvZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Establecimientoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWJsZWNpbWllbnRvZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Home/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Home/Privacy.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Imagens/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Imagens/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2Vuc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Imagens/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Imagens/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2Vuc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Imagens/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Imagens/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2Vuc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Imagens/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Imagens/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2Vuc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Imagens/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Imagens/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2Vuc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2pvc1JlYWxpemFkb2VzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2pvc1JlYWxpemFkb2VzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2pvc1JlYWxpemFkb2VzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2pvc1JlYWxpemFkb2VzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2pvc1JlYWxpemFkb2VzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/List.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2pvc1JlYWxpemFkb2VzXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/List1.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/RecojosRealizadoes/List1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2pvc1JlYWxpemFkb2VzXExpc3QxLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Recolectors/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Recolectors/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2xlY3RvcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Recolectors/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Recolectors/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2xlY3RvcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Recolectors/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Recolectors/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2xlY3RvcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Recolectors/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Recolectors/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2xlY3RvcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Recolectors/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Recolectors/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2xlY3RvcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Recolectors/Index1.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Recolectors/Index1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2xlY3RvcnNcSW5kZXgxLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Shared/Error.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVEVzdGFibGVjaW1pZW50b1VzZXJzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVEVzdGFibGVjaW1pZW50b1VzZXJzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVEVzdGFibGVjaW1pZW50b1VzZXJzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVEVzdGFibGVjaW1pZW50b1VzZXJzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TEstablecimientoUsers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVEVzdGFibGVjaW1pZW50b1VzZXJzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVFJlY29sZWN0b3JVc2Vyc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVFJlY29sZWN0b3JVc2Vyc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVFJlY29sZWN0b3JVc2Vyc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVFJlY29sZWN0b3JVc2Vyc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/TRecolectorUsers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVFJlY29sZWN0b3JVc2Vyc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Usuarios/Create.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Usuarios/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Usuarios/Delete.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Usuarios/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Usuarios/Details.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Usuarios/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Usuarios/Edit.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Usuarios/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Usuarios/Index.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/_ViewImports.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/_ViewStart.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Univalle/Quinto Semestre/Reto/Asilo/Asilo/Views/Shared/_Layout.cshtml]
+[D:/Univalle/Carpeta_Qunto_Semestre/Reto/Asilo/Asilo/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-zezd2y7v2x
